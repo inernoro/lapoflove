@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Memorials | Lap of Love</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="/" class="logo">Lap of Love</a>
+                <ul class="nav-menu">
+                    <li>
+                        <a href="#services">Services</a>
+                        <div class="dropdown">
+                            <div class="dropdown-section">
+                                <div class="dropdown-title">In-Home Services</div>
+                                <a href="#euthanasia">In-Home Euthanasia</a>
+                                <a href="#quality-life">Quality of Life Consultation</a>
+                                <a href="#telemedicine">Telemedicine</a>
+                                <a href="#hospice">Pet Hospice Care</a>
+                            </div>
+                            <div class="dropdown-section">
+                                <div class="dropdown-title">Aftercare</div>
+                                <a href="#cremation">Pet Cremation</a>
+                                <a href="#memorials">Pet Memorials</a>
+                                <a href="#keepsakes">Memorial Keepsakes</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#resources">Resources</a>
+                        <div class="dropdown">
+                            <a href="#grief-support">Grief Support</a>
+                            <a href="#rainbow-bridge">Rainbow Bridge</a>
+                            <a href="#pet-loss">Pet Loss Resources</a>
+                            <a href="#blog">Blog & Articles</a>
+                            <a href="#faq">FAQ</a>
+                            <a href="#costs">Service Costs</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#quality">Quality of Life</a>
+                        <div class="dropdown">
+                            <a href="#scale">Quality of Life Scale</a>
+                            <a href="#assessment">Pet Assessment</a>
+                            <a href="#pain-management">Pain Management</a>
+                            <a href="#senior-care">Senior Pet Care</a>
+                            <a href="#when-time">When It's Time</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#community">Community</a>
+                        <div class="dropdown">
+                            <a href="/">Pet Memorials</a>
+                            <a href="/create">Create Memorial</a>
+                            <a href="#stories">Pet Stories</a>
+                            <a href="#support-groups">Support Groups</a>
+                            <a href="#events">Community Events</a>
+                            <a href="#newsletter">Newsletter</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#about">About Us</a>
+                        <div class="dropdown">
+                            <a href="#our-story">Our Story</a>
+                            <a href="#team">Our Team</a>
+                            <a href="#mission">Mission & Values</a>
+                            <a href="#locations">Service Areas</a>
+                            <a href="#reviews">Reviews</a>
+                            <a href="#press">Press & Media</a>
+                        </div>
+                    </li>
+                </ul>
+                <div class="nav-buttons">
+                    <a href="#schedule" class="nav-btn nav-btn-outline">Schedule</a>
+                    <a href="#join" class="nav-btn nav-btn-outline">Join Our Team</a>
+                    <a href="#find" class="nav-btn nav-btn-purple">Find a Vet</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">In Loving Memory</h1>
+                <p class="hero-subtitle">
+                    Remembering the pets who have crossed the rainbow bridge<br>
+                    and the paw prints they've forever left on our hearts.
+                </p>
+                <a href="/create" class="hero-cta-btn">Create a memorial for your pet</a>
+
+                <!-- Floating Pet Avatars -->
+                <div class="floating-avatars">
+                    <div class="floating-avatar avatar-1"></div>
+                    <div class="floating-avatar avatar-2"></div>
+                    <div class="floating-avatar avatar-3"></div>
+                    <div class="floating-avatar avatar-4"></div>
+                    <div class="floating-avatar avatar-5"></div>
+                    <div class="floating-avatar avatar-6"></div>
+                    <div class="floating-avatar avatar-7"></div>
+                    <div class="floating-avatar avatar-8"></div>
+                </div>
+
+                <!-- Central Leaf Icon -->
+                <div class="central-icon">
+                    <svg width="80" height="100" viewBox="0 0 80 100" fill="none">
+                        <path d="M40 95C40 95 5 70 5 40C5 22.3 20.3 7 38 7H42C59.7 7 75 22.3 75 40C75 70 40 95 40 95Z" fill="#D4B06A" stroke="#B8943F" stroke-width="2"/>
+                        <path d="M40 7C40 35 40 65 40 95" stroke="#B8943F" stroke-width="2"/>
+                        <path d="M40 30C50 25 60 35 55 45" stroke="#B8943F" stroke-width="1.5"/>
+                        <path d="M40 50C50 45 60 55 55 65" stroke="#B8943F" stroke-width="1.5"/>
+                    </svg>
+                </div>
+
+                <div class="scroll-indicator">
+                    <p>Scroll for memorials</p>
+                    <div class="scroll-arrow">⬇</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="searchByPet" class="search-input" placeholder="Search memorials by pet name">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="searchByOwner" class="search-input" placeholder="Search memorials by owner name">
+                    <button class="search-btn">🔍</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Memorials Section -->
+    <section class="memorials-section">
+        <div class="container">
+            <div id="memorialsContainer">
+                <div class="loading">Loading pet memorials...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Memorial Modal -->
+    <div id="memorialModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <div class="modal-title">
+                    <h2 id="modalPetName">Pet Name</h2>
+                    <div class="dates" id="modalDates">Birth - Death</div>
+                </div>
+                <div class="modal-actions">
+                    <button class="share-btn" title="Share on Facebook">📘</button>
+                    <button class="share-btn" title="Share via Email">✉️</button>
+                    <button class="share-btn" title="Share on Twitter">🐦</button>
+                    <button class="light-candle-btn" onclick="scrollToCandleForm()">Light a candle</button>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="memorial-image-container">
+                    <img id="modalMainImage" class="memorial-main-image" src="" alt="Pet Photo">
+                </div>
+
+                <div class="modal-tabs">
+                    <button class="tab-btn active" onclick="showTab('memory')">In loving memory of <span id="tabPetName">Pet</span></button>
+                    <button class="tab-btn" onclick="showTab('story')"><span id="tabPetName2">Pet</span>'s Story</button>
+                    <button class="tab-btn" onclick="showTab('testimonial')">Vet Testimonial</button>
+                </div>
+
+                <div id="memory-tab" class="tab-content active">
+                    <p id="memoryContent">Memorial content will be loaded here...</p>
+                    <p class="author-signature" id="memoryAuthor">— Owner Name</p>
+                    <p class="author-signature" id="memoryLocation">Location • Date</p>
+                </div>
+
+                <div id="story-tab" class="tab-content">
+                    <p id="storyContent">Pet's story will be loaded here...</p>
+                    <p class="author-signature" id="storyAuthor">— Owner Name</p>
+                    <p class="author-signature" id="storyLocation">Location • Date</p>
+                </div>
+
+                <div id="testimonial-tab" class="tab-content">
+                    <p>Vet testimonial content would be displayed here.</p>
+                    <p class="author-signature">— Veterinarian Name</p>
+                </div>
+
+                <div class="candle-form-section">
+                    <h3 class="candle-form-title">Light a candle for <span id="candlePetName">Pet Name</span></h3>
+
+                    <form id="candleForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Full Name*</label>
+                                <input type="text" class="form-input" id="candleName" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email Address*</label>
+                                <input type="email" class="form-input" id="candleEmail" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">Your message</label>
+                            <textarea class="form-textarea" id="candleMessage" placeholder="Share a memory or message of comfort..."></textarea>
+                        </div>
+
+                        <div class="recaptcha-container">
+                            <div style="background: #f9f9f9; padding: 20px; border: 1px solid #e5e7eb; border-radius: 4px; text-align: center; color: #6b7280; font-size: 14px;">
+                                ☑️ I'm not a robot<br>
+                                <small style="color: #9ca3af;">reCAPTCHA</small>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Light Candle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allMemorials = [];
+        let currentMemorialId = null;
+
+        function generatePlaceholderAvatar(petName) {
+            const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FECA57', '#FF9FF3', '#54A0FF', '#5F27CD'];
+            const firstLetter = petName.charAt(0).toUpperCase();
+            const colorIndex = petName.charCodeAt(0) % colors.length;
+            const color = colors[colorIndex];
+
+            // Create a canvas element for the avatar
+            const canvas = document.createElement('canvas');
+            canvas.width = 50;
+            canvas.height = 50;
+            const ctx = canvas.getContext('2d');
+
+            // Draw circle background
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(25, 25, 25, 0, 2 * Math.PI);
+            ctx.fill();
+
+            // Draw letter
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 20px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(firstLetter, 25, 25);
+
+            return canvas.toDataURL();
+        }
+
+        async function loadMemorials() {
+            try {
+                const response = await fetch('/api/memorials');
+                allMemorials = await response.json();
+                displayMemorials(allMemorials);
+            } catch (error) {
+                console.error('Failed to load memorials:', error);
+                document.getElementById('memorialsContainer').innerHTML = `
+                    <div class="empty-state">
+                        <h3>Failed to load memorials</h3>
+                        <p>Please refresh the page to try again</p>
+                        <a href="/create" class="nav-btn nav-btn-purple">Create a Memorial</a>
+                    </div>
+                `;
+            }
+        }
+
+        function displayMemorials(memorials) {
+            const container = document.getElementById('memorialsContainer');
+
+            if (memorials.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <h3>No pet memorials yet</h3>
+                        <p>Be the first to create a beautiful memorial for your beloved pet</p>
+                        <a href="/create" class="nav-btn nav-btn-purple">Create the first memorial</a>
+                    </div>
+                `;
+                return;
+            }
+
+            const grid = document.createElement('div');
+            grid.className = 'memorials-grid';
+
+            memorials.forEach(memorial => {
+                const card = document.createElement('div');
+                card.className = 'memorial-card';
+                card.onclick = () => openModal(memorial);
+
+                const imageUrl = memorial.photos && memorial.photos.length > 0
+                    ? memorial.photos[0]
+                    : generatePlaceholderAvatar(memorial.petName);
+
+                const birthDate = memorial.birthDate ? new Date(memorial.birthDate).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                }) : '';
+
+                const deathDate = memorial.deathDate ? new Date(memorial.deathDate).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                }) : '';
+
+                const dateRange = birthDate && deathDate ? `${birthDate} - ${deathDate}` : '';
+                const createdDate = new Date(memorial.createdAt).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+
+                // Create elements properly to avoid HTML encoding issues
+                const header = document.createElement('div');
+                header.className = 'memorial-header';
+
+                const avatar = document.createElement('img');
+                avatar.src = imageUrl;
+                avatar.alt = memorial.petName;
+                avatar.className = 'memorial-avatar';
+
+                // Set fallback for failed image loads
+                avatar.onerror = function() {
+                    this.src = generatePlaceholderAvatar(memorial.petName);
+                };
+
+                const info = document.createElement('div');
+                info.className = 'memorial-info';
+
+                const nameEl = document.createElement('h3');
+                nameEl.textContent = memorial.petName;
+
+                info.appendChild(nameEl);
+
+                if (dateRange) {
+                    const datesEl = document.createElement('div');
+                    datesEl.className = 'memorial-dates';
+                    datesEl.textContent = dateRange;
+                    info.appendChild(datesEl);
+                }
+
+                header.appendChild(avatar);
+                header.appendChild(info);
+
+                const description = document.createElement('div');
+                description.className = 'memorial-description';
+                description.textContent = memorial.story;
+
+                const footer = document.createElement('div');
+                footer.className = 'memorial-footer';
+
+                const author = document.createElement('span');
+                author.className = 'memorial-author';
+                author.textContent = memorial.ownerName;
+
+                const date = document.createElement('span');
+                date.className = 'memorial-date';
+                date.textContent = createdDate;
+
+                footer.appendChild(author);
+                footer.appendChild(date);
+
+                card.appendChild(header);
+                card.appendChild(description);
+                card.appendChild(footer);
+
+                grid.appendChild(card);
+            });
+
+            container.innerHTML = '';
+            container.appendChild(grid);
+        }
+
+        function openModal(memorial) {
+            currentMemorialId = memorial.id;
+
+            // Update modal content
+            document.getElementById('modalPetName').textContent = memorial.petName;
+            document.getElementById('tabPetName').textContent = memorial.petName;
+            document.getElementById('tabPetName2').textContent = memorial.petName;
+            document.getElementById('candlePetName').textContent = memorial.petName;
+
+            const birthDate = memorial.birthDate ? new Date(memorial.birthDate).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            }) : '';
+
+            const deathDate = memorial.deathDate ? new Date(memorial.deathDate).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            }) : '';
+
+            const dateRange = birthDate && deathDate ? `${birthDate} - ${deathDate}` : '';
+            document.getElementById('modalDates').textContent = dateRange;
+
+            // Set main image
+            if (memorial.photos && memorial.photos.length > 0) {
+                document.getElementById('modalMainImage').src = memorial.photos[0];
+                document.getElementById('modalMainImage').style.display = 'block';
+            } else {
+                // Show placeholder image
+                document.getElementById('modalMainImage').src = generatePlaceholderAvatar(memorial.petName);
+                document.getElementById('modalMainImage').style.display = 'block';
+                document.getElementById('modalMainImage').style.width = '200px';
+                document.getElementById('modalMainImage').style.height = '200px';
+                document.getElementById('modalMainImage').style.borderRadius = '50%';
+                document.getElementById('modalMainImage').style.margin = '20px auto';
+            }
+
+            // Update tab content safely
+            const memoryContent = document.getElementById('memoryContent');
+            const memoryAuthor = document.getElementById('memoryAuthor');
+            const memoryLocation = document.getElementById('memoryLocation');
+            const storyContent = document.getElementById('storyContent');
+            const storyAuthor = document.getElementById('storyAuthor');
+            const storyLocation = document.getElementById('storyLocation');
+
+            memoryContent.textContent = memorial.story;
+            memoryAuthor.textContent = `— ${memorial.ownerName}`;
+            memoryLocation.textContent = `Location • ${new Date(memorial.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+
+            storyContent.textContent = memorial.story;
+            storyAuthor.textContent = `— ${memorial.ownerName}`;
+            storyLocation.textContent = `Location • ${new Date(memorial.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+
+            // Show modal
+            document.getElementById('memorialModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('memorialModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            currentMemorialId = null;
+        }
+
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function scrollToCandleForm() {
+            const candleForm = document.querySelector('.candle-form-section');
+            candleForm.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function searchMemorials() {
+            const petSearch = document.getElementById('searchByPet').value.toLowerCase();
+            const ownerSearch = document.getElementById('searchByOwner').value.toLowerCase();
+
+            const filteredMemorials = allMemorials.filter(memorial => {
+                const matchesPet = !petSearch || memorial.petName.toLowerCase().includes(petSearch);
+                const matchesOwner = !ownerSearch || memorial.ownerName.toLowerCase().includes(ownerSearch);
+                return matchesPet && matchesOwner;
+            });
+
+            displayMemorials(filteredMemorials);
+        }
+
+        // Event listeners
+        document.getElementById('searchByPet').addEventListener('input', searchMemorials);
+        document.getElementById('searchByOwner').addEventListener('input', searchMemorials);
+
+        // Close modal when clicking outside
+        document.getElementById('memorialModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('memorialModal').style.display === 'flex') {
+                closeModal();
+            }
+        });
+
+        // Handle candle form submission
+        document.getElementById('candleForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('candleName').value.trim();
+            const email = document.getElementById('candleEmail').value.trim();
+            const message = document.getElementById('candleMessage').value.trim();
+
+            if (!name || !email) {
+                alert('Please fill in your name and email address.');
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/memorial/${currentMemorialId}/candle`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: message || 'Lit a candle in memory',
+                        senderName: name
+                    })
+                });
+
+                if (response.ok) {
+                    alert('Your candle has been lit successfully!');
+                    document.getElementById('candleForm').reset();
+                } else {
+                    throw new Error('Failed to light candle');
+                }
+            } catch (error) {
+                console.error('Failed to light candle:', error);
+                alert('Failed to light candle. Please try again.');
+            }
+        });
+
+        // Load memorials on page load
+        loadMemorials();
+    </script>
+</body>
+</html>

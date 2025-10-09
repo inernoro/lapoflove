@@ -1,0 +1,38 @@
+# 简化版Dockerfile - 适用于网络环境较差的情况
+FROM node:18-alpine
+
+# 设置工作目录
+WORKDIR /app
+
+# 安装nginx（使用apk缓存加速）
+RUN apk update && apk add --no-cache nginx
+
+# 复制package文件并安装依赖
+COPY package*.json ./
+RUN npm install --production
+
+# 复制所有源文件
+COPY . .
+
+# 创建必要目录
+RUN mkdir -p /etc/nginx/ssl \
+    && mkdir -p /var/log/nginx \
+    && mkdir -p /var/run \
+    && mkdir -p /usr/share/nginx/html/uploads \
+    && mkdir -p /app/data
+
+# 复制静态文件到nginx目录
+RUN cp -r public/* /usr/share/nginx/html/
+
+# 复制nginx配置
+RUN cp docker/nginx/nginx.conf /etc/nginx/nginx.conf
+
+# 设置权限
+RUN chmod +x docker/start.sh \
+    && chmod -R 755 /usr/share/nginx/html
+
+# 暴露端口
+EXPOSE 80 443
+
+# 启动脚本
+CMD ["./docker/start.sh"]

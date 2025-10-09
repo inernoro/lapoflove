@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.lapoflove.com)",
+      "Bash(npm install)",
+      "Bash(npm start)",
+      "Bash(chmod:*)",
+      "Bash(./deploy-china.sh)",
+      "Bash(ping:*)",
+      "Bash(docker:*)",
+      "Bash(curl:*)",
+      "Bash(sh:*)",
+      "Read(//d/**)",
+      "Bash(where docker.exe)",
+      "Bash(git init:*)",
+      "Bash(git remote add:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

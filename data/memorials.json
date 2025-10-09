@@ -1,0 +1,157 @@
+[
+  {
+    "id": "memorial-001",
+    "petName": "Maverick",
+    "ownerName": "Liz",
+    "story": "Home feels so much emptier without your presence. You were the most loyal companion, always by my side through every adventure. Your gentle soul and playful spirit brought so much joy to our family. I miss your morning greetings and the way you'd curl up next to me on cold nights. Until we meet again, sweet boy.",
+    "birthDate": "2012-08-06",
+    "deathDate": "2025-10-06",
+    "photos": [],
+    "candles": [
+      {
+        "id": "candle-001",
+        "message": "Maverick was such a special dog. He will be deeply missed by all who knew him.",
+        "senderName": "Sarah Johnson",
+        "createdAt": "2025-10-07T10:30:00.000Z"
+      }
+    ],
+    "createdAt": "2025-10-08T09:15:00.000Z"
+  },
+  {
+    "id": "memorial-002",
+    "petName": "Maggie",
+    "ownerName": "Katy",
+    "story": "Maggie was my first child, more than a pet. She was with me through every single life event. My most loyal companion. So loved. I have no words the feeling of emptiness I feel now. You were the kindest little girl in the world. Even when others brought you pain, brought you stress... you never lashed out, you never hissed, bit, or scratched anyone. Even when you were confused and, in such pain, because love was at the core of who you are. You didn't deserve such pain, and it killed me to see you go through it. It killed me even more to add onto it, by putting you in your carrier, putting you into the car, driving you to the vet, getting your blood drawn with such painful needles, leaving you there, leaving you there... leaving you beautiful. Leaving you quiet.",
+    "petName": "Maggie",
+    "ownerName": "Katy",
+    "birthDate": "2004-04-05",
+    "deathDate": "2025-10-06",
+    "photos": [],
+    "candles": [],
+    "createdAt": "2025-10-08T08:20:00.000Z"
+  },
+  {
+    "id": "memorial-003",
+    "petName": "Sochi",
+    "ownerName": "Savannah",
+    "story": "My best friend, my north star, my Honey Bear/Baby Man/Baby Love/Sochi Love (and everything else I called you). I love you more than anything else and always will. You are my world. You are my everything. I love you sweetheart, my sweet boy, and Princess and I miss you like crazy. We cannot wait to see you again.",
+    "birthDate": "2013-12-28",
+    "deathDate": "2025-10-06",
+    "photos": [],
+    "candles": [
+      {
+        "id": "candle-002",
+        "message": "Sochi was such a loving companion. Sending you comfort during this difficult time.",
+        "senderName": "Michael Chen",
+        "createdAt": "2025-10-07T14:20:00.000Z"
+      },
+      {
+        "id": "candle-003",
+        "message": "What a beautiful tribute to a special friend. Sochi was lucky to have you.",
+        "senderName": "Emily Davis",
+        "createdAt": "2025-10-07T16:45:00.000Z"
+      }
+    ],
+    "createdAt": "2025-10-08T07:50:00.000Z"
+  },
+  {
+    "id": "memorial-004",
+    "petName": "Elvis",
+    "ownerName": "Josie",
+    "story": "Elvis was small but had the biggest personality. He loved wading in creeks or swimming in my mom's pool with the kids. When he was young and spry he would zoom around the living room or out in the sunshine in the backyard, heck even if there was snow. He was gentle- he was the most gentle dog around kids and smaller animals even though he thoroughly enjoyed chasing our chickens around the yard, knowing full well he would never catch one. He was a ball dog for sure, if it bounced he was all about it. Elvis was a crafty scavenger too, once pulling a bag of dog food twice his weight out from the closet and opening it for a buffet while we were at work. Unlike his older brother Odin, Elvis never minded getting his paws wet.",
+    "birthDate": "2011-05-25",
+    "deathDate": "2025-10-06",
+    "photos": [],
+    "candles": [
+      {
+        "id": "candle-004",
+        "message": "Elvis sounds like he was an amazing companion. What wonderful memories you have.",
+        "senderName": "Lisa Rodriguez",
+        "createdAt": "2025-10-08T09:30:00.000Z"
+      }
+    ],
+    "createdAt": "2025-10-08T06:45:00.000Z"
+  },
+  {
+    "id": "memorial-005",
+    "petName": "Mia",
+    "ownerName": "Lisa",
+    "story": "Forever wouldn't have been enough time with you. You are dearly missed and will be in my heart forever.",
+    "birthDate": "2007-02-11",
+    "deathDate": "2025-10-10",
+    "photos": [],
+    "candles": [],
+    "createdAt": "2025-10-07T15:30:00.000Z"
+  },
+  {
+    "id": "memorial-006",
+    "petName": "Le Chat",
+    "ownerName": "Mark",
+    "story": "Rest easy, my kitty until we meet again at the end of all things.",
+    "birthDate": "2004-04-07",
+    "deathDate": "2025-09-24",
+    "photos": [],
+    "candles": [
+      {
+        "id": "candle-005",
+        "message": "Cats have such a special place in our hearts. Le Chat was lucky to have you.",
+        "senderName": "Amanda Foster",
+        "createdAt": "2025-10-07T11:15:00.000Z"
+      }
+    ],
+    "createdAt": "2025-10-07T12:20:00.000Z"
+  },
+  {
+    "id": "memorial-007",
+    "petName": "Tooty He...",
+    "ownerName": "Cathy",
+    "story": "We love you always, Tooty.",
+    "birthDate": "2016-05-16",
+    "deathDate": "2025-10-05",
+    "photos": [],
+    "candles": [],
+    "createdAt": "2025-10-07T10:10:00.000Z"
+  },
+  {
+    "id": "memorial-008",
+    "petName": "Buddy",
+    "ownerName": "Jason",
+    "story": "I love and miss you so much buddy, you were such a good dog and now the house is a lot more quiet without you here. I hope you are resting well and enjoyed all the good food you had.",
+    "birthDate": "2012-05-28",
+    "deathDate": "2025-10-03",
+    "photos": [],
+    "candles": [
+      {
+        "id": "candle-006",
+        "message": "Buddy sounds like he was a wonderful companion. Thinking of you during this difficult time.",
+        "senderName": "Rebecca Kim",
+        "createdAt": "2025-10-07T13:40:00.000Z"
+      },
+      {
+        "id": "candle-007",
+        "message": "Dogs like Buddy leave paw prints on our hearts forever. Beautiful memories.",
+        "senderName": "David Wilson",
+        "createdAt": "2025-10-08T08:20:00.000Z"
+      }
+    ],
+    "createdAt": "2025-10-07T09:00:00.000Z"
+  },
+  {
+    "id": "memorial-009",
+    "petName": "Lily",
+    "ownerName": "Jennifer",
+    "story": "My sweet little baby, my sweet little girl. I'm sorry that you had to go through so much pain in the last week. I know things hurt. You were the kindest little girl in the world. Even when others brought you pain, brought you stress... you never lashed out, you never hissed, bit, or scratched anyone. Even when you were confused and in such pain, because love was at the core of who you are.",
+    "birthDate": "2014-09-11",
+    "deathDate": "2025-10-05",
+    "photos": [],
+    "candles": [
+      {
+        "id": "candle-008",
+        "message": "Lily sounds like she was pure love. What a beautiful soul.",
+        "senderName": "Thomas Anderson",
+        "createdAt": "2025-10-07T17:25:00.000Z"
+      }
+    ],
+    "createdAt": "2025-10-06T14:30:00.000Z"
+  }
+]
