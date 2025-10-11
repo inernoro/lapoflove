@@ -136,11 +136,33 @@
 
                     <div class="form-group full-width">
                         <label class="form-label">Pet Photos</label>
-                        <div class="file-upload" onclick="document.getElementById('photos').click()">
+                        
+                        <!-- 图片选择方式 -->
+                        <div style="margin-bottom: 15px;">
+                            <label style="display: flex; align-items: center; margin-bottom: 10px;">
+                                <input type="radio" name="photoOption" value="upload" style="margin-right: 8px;" checked onchange="togglePhotoOption()">
+                                上传自己的照片
+                            </label>
+                            <label style="display: flex; align-items: center;">
+                                <input type="radio" name="photoOption" value="random" style="margin-right: 8px;" onchange="togglePhotoOption()">
+                                使用随机宠物照片（高质量CDN图片）
+                            </label>
+                        </div>
+
+                        <!-- 文件上传区域 -->
+                        <div id="uploadArea" class="file-upload" onclick="document.getElementById('photos').click()">
                             <input type="file" id="photos" name="photos" accept="image/*" multiple>
                             <div class="file-upload-text">Click to select photos or drag and drop</div>
                             <div class="file-upload-hint">Upload multiple photos to create a gallery</div>
                         </div>
+
+                        <!-- 随机图片预览区域 -->
+                        <div id="randomArea" style="display: none; padding: 20px; border: 2px dashed #ddd; border-radius: 8px; text-align: center;">
+                            <p style="margin-bottom: 15px; color: #666;">将自动为您的纪念册分配一张高质量的宠物照片</p>
+                            <button type="button" onclick="previewRandomImage()" style="background: #8B5CF6; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer;">预览随机图片</button>
+                            <div id="randomPreview" style="margin-top: 15px;"></div>
+                        </div>
+
                         <div id="photoPreview" class="photo-gallery" style="margin-top: 20px;"></div>
                     </div>
 
@@ -154,6 +176,44 @@
         const form = document.getElementById('memorialForm');
         const photosInput = document.getElementById('photos');
         const photoPreview = document.getElementById('photoPreview');
+
+        // 切换图片选择方式
+        function togglePhotoOption() {
+            const photoOption = document.querySelector('input[name="photoOption"]:checked').value;
+            const uploadArea = document.getElementById('uploadArea');
+            const randomArea = document.getElementById('randomArea');
+            
+            if (photoOption === 'upload') {
+                uploadArea.style.display = 'block';
+                randomArea.style.display = 'none';
+                photoPreview.innerHTML = '';
+            } else {
+                uploadArea.style.display = 'none';
+                randomArea.style.display = 'block';
+                photoPreview.innerHTML = '';
+                // 清空文件选择
+                photosInput.value = '';
+            }
+        }
+
+        // 预览随机图片
+        function previewRandomImage() {
+            const randomPreview = document.getElementById('randomPreview');
+            // 从CDN图片池中随机选择一张
+            const randomImages = [
+                'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=400&fit=crop&crop=face',
+                'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=400&fit=crop&crop=face',
+                'https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=400&fit=crop&crop=face',
+                'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&h=400&fit=crop&crop=face',
+                'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=400&h=400&fit=crop&crop=face'
+            ];
+            const randomImage = randomImages[Math.floor(Math.random() * randomImages.length)];
+            
+            randomPreview.innerHTML = `
+                <img src="${randomImage}" style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px; border: 2px solid #ddd;">
+                <p style="margin-top: 10px; color: #666; font-size: 14px;">这是一张示例图片，实际图片将在提交时随机分配</p>
+            `;
+        }
 
         photosInput.addEventListener('change', function(e) {
             photoPreview.innerHTML = '';
@@ -183,6 +243,12 @@
 
             try {
                 const formData = new FormData(form);
+                
+                // 检查是否使用随机图片
+                const photoOption = document.querySelector('input[name="photoOption"]:checked').value;
+                if (photoOption === 'random') {
+                    formData.append('useRandomImage', 'true');
+                }
 
                 const response = await fetch('/api/memorial', {
                     method: 'POST',
@@ -195,7 +261,7 @@
                     alert('Memorial created successfully!');
                     window.location.href = `/`;
                 } else {
-                    throw new Error('Failed to create memorial');
+                    throw new Error(result.message || 'Failed to create memorial');
                 }
             } catch (error) {
                 console.error('Failed to create memorial:', error);

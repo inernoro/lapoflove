@@ -266,6 +266,7 @@
                 const response = await fetch('/api/memorials');
                 allMemorials = await response.json();
                 displayMemorials(allMemorials);
+                updateFloatingAvatars(allMemorials);
             } catch (error) {
                 console.error('Failed to load memorials:', error);
                 document.getElementById('memorialsContainer').innerHTML = `
@@ -276,6 +277,30 @@
                     </div>
                 `;
             }
+        }
+
+        function updateFloatingAvatars(memorials) {
+            const avatars = document.querySelectorAll('.floating-avatar');
+            
+            avatars.forEach((avatar, index) => {
+                if (index < memorials.length) {
+                    const memorial = memorials[index];
+                    if (memorial.photos && memorial.photos.length > 0) {
+                        // Update avatar to show pet photo instead of emoji
+                        avatar.style.backgroundImage = `url('${memorial.photos[0]}')`;
+                        avatar.style.backgroundSize = 'cover';
+                        avatar.style.backgroundPosition = 'center';
+                        avatar.style.backgroundRepeat = 'no-repeat';
+                        
+                        // Add click handler to open memorial
+                        avatar.style.cursor = 'pointer';
+                        avatar.onclick = () => openModal(memorial);
+                        
+                        // Add title for tooltip
+                        avatar.title = memorial.petName;
+                    }
+                }
+            });
         }
 
         function displayMemorials(memorials) {
