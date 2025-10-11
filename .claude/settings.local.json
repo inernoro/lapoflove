@@ -19,7 +19,9 @@
       "WebSearch",
       "WebFetch(domain:www.pexels.com)",
       "WebFetch(domain:pixabay.com)",
-      "WebFetch(domain:unsplash.com)"
+      "WebFetch(domain:unsplash.com)",
+      "Bash(npm run build:*)",
+      "Bash(mkdir:*)"
     ],
     "deny": [],
     "ask": []
