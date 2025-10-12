@@ -228,6 +228,19 @@
         </div>
     </section>
 
+    <!-- Thank You Modal -->
+    <div id="thankYouModal" class="thank-you-modal">
+        <div class="thank-you-content">
+            <button class="thank-you-close" onclick="closeThankYouModal()">×</button>
+            <div class="thank-you-icon">🕯️</div>
+            <h2 class="thank-you-title">Thank you for submitting your memorial</h2>
+            <p class="thank-you-message">
+                We will post it within 5 business days and you will receive an email letting you know your angel's memorial is ready to view.
+            </p>
+            <button class="thank-you-btn" onclick="closeThankYouModal()">确定</button>
+        </div>
+    </div>
+
     <style>
         .demo-photo {
             width: 100%;
@@ -446,17 +459,7 @@
                 }
 
                 // 显示成功消息
-                alert(`Memorial Created Successfully! (Demo Mode)
-
-Pet Name: ${petName}
-Owner: ${ownerName}
-Story: ${story.substring(0, 50)}...
-Photo: ${photoUrl}
-
-Note: This is a demo version. In the full version, your memorial would be saved to the database.`);
-
-                // 重定向到主页
-                window.location.href = 'index-static.html';
+                showThankYouModal();
             } catch (error) {
                 console.error('Failed to create memorial:', error);
                 alert('Failed to create memorial. Please try again.');
@@ -502,6 +505,23 @@ Note: This is a demo version. In the full version, your memorial would be saved 
             
             selectedFiles = [...selectedFiles, ...filesToAdd];
             updatePhotoPreview();
+        });
+
+        // Thank You Modal Functions
+        function showThankYouModal() {
+            document.getElementById('thankYouModal').classList.add('show');
+        }
+
+        function closeThankYouModal() {
+            document.getElementById('thankYouModal').classList.remove('show');
+            window.location.href = 'index-static.html';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('thankYouModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeThankYouModal();
+            }
         });
     </script>
 </body>
