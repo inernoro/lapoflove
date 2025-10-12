@@ -11,7 +11,7 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-content">
-                <a href="index-static.html" class="logo">Lap of Love</a>
+                <a href="/" class="logo">Lap of Love</a>
                 <ul class="nav-menu">
                     <li>
                         <a href="#services">Services</a>
@@ -55,8 +55,8 @@
                     <li>
                         <a href="#community">Community</a>
                         <div class="dropdown">
-                            <a href="index-static.html">Pet Memorials</a>
-                            <a href="create-static.html">Create Memorial</a>
+                            <a href="/">Pet Memorials</a>
+                            <a href="/create">Create Memorial</a>
                             <a href="#stories">Pet Stories</a>
                             <a href="#support-groups">Support Groups</a>
                             <a href="#events">Community Events</a>
@@ -93,7 +93,7 @@
                     Remembering the pets who have crossed the rainbow bridge<br>
                     and the paw prints they've forever left on our hearts.
                 </p>
-                <a href="create-static.html" class="hero-cta-btn">Create a memorial for your pet</a>
+                <a href="/create" class="hero-cta-btn">Create a memorial for your pet</a>
 
                 <!-- Floating Pet Avatars -->
                 <div class="floating-avatars">
@@ -218,7 +218,7 @@
                         <div class="recaptcha-container">
                             <div style="background: #f9f9f9; padding: 20px; border: 1px solid #e5e7eb; border-radius: 4px; text-align: center; color: #6b7280; font-size: 14px;">
                                 ☑️ I'm not a robot<br>
-                                <small style="color: #9ca3af;">reCAPTCHA (Demo Mode)</small>
+                                <small style="color: #9ca3af;">reCAPTCHA</small>
                             </div>
                         </div>
 
@@ -230,128 +230,6 @@
     </div>
 
     <script>
-        // Mock API Data - 模拟后端数据
-        const MOCK_MEMORIALS = [
-  {
-    "id": "memorial-001",
-    "petName": "Maverick",
-    "ownerName": "Liz",
-    "story": "Home feels so much emptier without your presence. You were the most loyal companion, always by my side through every adventure. Your gentle soul and playful spirit brought so much joy to our family. I miss your morning greetings and the way you'd curl up next to me on cold nights. Until we meet again, sweet boy.",
-    "birthDate": "2012-08-06",
-    "deathDate": "2025-10-06",
-    "photos": [
-      "demo-images/golden-retriever.jpg"
-    ],
-    "candles": [
-      {
-        "id": "candle-001",
-        "message": "Maverick was such a special dog. He will be deeply missed by all who knew him.",
-        "senderName": "Sarah Johnson",
-        "createdAt": "2025-10-07T10:30:00.000Z"
-      }
-    ],
-    "createdAt": "2025-10-08T09:15:00.000Z"
-  },
-  {
-    "id": "memorial-002",
-    "petName": "Maggie",
-    "ownerName": "Katy",
-    "story": "Maggie was my first child, more than a pet. She was with me through every single life event. My most loyal companion. So loved. I have no words the feeling of emptiness I feel now. You were the kindest little girl in the world.",
-    "birthDate": "2004-04-05",
-    "deathDate": "2025-10-06",
-    "photos": [
-      "demo-images/orange-cat.jpg"
-    ],
-    "candles": [],
-    "createdAt": "2025-10-08T08:20:00.000Z"
-  },
-  {
-    "id": "memorial-003",
-    "petName": "Sochi",
-    "ownerName": "Savannah",
-    "story": "My best friend, my north star, my Honey Bear/Baby Man/Baby Love/Sochi Love (and everything else I called you). I love you more than anything else and always will. You are my world. You are my everything. I love you sweetheart, my sweet boy.",
-    "birthDate": "2013-12-28",
-    "deathDate": "2025-10-06",
-    "photos": [
-      "demo-images/small-dog.jpg"
-    ],
-    "candles": [
-      {
-        "id": "candle-002",
-        "message": "Sochi was such a loving companion. Sending you comfort during this difficult time.",
-        "senderName": "Michael Chen",
-        "createdAt": "2025-10-07T14:20:00.000Z"
-      }
-    ],
-    "createdAt": "2025-10-08T07:50:00.000Z"
-  },
-  {
-    "id": "memorial-004",
-    "petName": "Elvis",
-    "ownerName": "Josie",
-    "story": "Elvis was small but had the biggest personality. He loved wading in creeks or swimming in my mom's pool with the kids. When he was young and spry he would zoom around the living room or out in the sunshine in the backyard.",
-    "birthDate": "2011-05-25",
-    "deathDate": "2025-10-06",
-    "photos": [
-      "demo-images/puppy.jpg"
-    ],
-    "candles": [],
-    "createdAt": "2025-10-08T06:45:00.000Z"
-  },
-  {
-    "id": "memorial-005",
-    "petName": "Mia",
-    "ownerName": "Lisa",
-    "story": "Forever wouldn't have been enough time with you. You are dearly missed and will be in my heart forever.",
-    "birthDate": "2007-02-11",
-    "deathDate": "2025-10-10",
-    "photos": [
-      "demo-images/white-cat.jpg"
-    ],
-    "candles": [],
-    "createdAt": "2025-10-07T15:30:00.000Z"
-  },
-  {
-    "id": "memorial-006",
-    "petName": "Le Chat",
-    "ownerName": "Mark",
-    "story": "Rest easy, my kitty until we meet again at the end of all things.",
-    "birthDate": "2004-04-07",
-    "deathDate": "2025-09-24",
-    "photos": [
-      "demo-images/black-cat.jpg"
-    ],
-    "candles": [],
-    "createdAt": "2025-10-07T12:20:00.000Z"
-  },
-  {
-    "id": "memorial-007",
-    "petName": "Buddy",
-    "ownerName": "Jason",
-    "story": "I love and miss you so much buddy, you were such a good dog and now the house is a lot more quiet without you here. I hope you are resting well and enjoyed all the good food you had.",
-    "birthDate": "2012-05-28",
-    "deathDate": "2025-10-03",
-    "photos": [
-      "demo-images/beagle.jpg"
-    ],
-    "candles": [],
-    "createdAt": "2025-10-07T09:00:00.000Z"
-  },
-  {
-    "id": "memorial-008",
-    "petName": "Lily",
-    "ownerName": "Jennifer",
-    "story": "My sweet little baby, my sweet little girl. You were the kindest little girl in the world. Even when others brought you pain, you never lashed out, because love was at the core of who you are.",
-    "birthDate": "2014-09-11",
-    "deathDate": "2025-10-05",
-    "photos": [
-      "demo-images/gray-cat.jpg"
-    ],
-    "candles": [],
-    "createdAt": "2025-10-06T14:30:00.000Z"
-  }
-];
-
         let allMemorials = [];
         let currentMemorialId = null;
 
@@ -361,16 +239,19 @@
             const colorIndex = petName.charCodeAt(0) % colors.length;
             const color = colors[colorIndex];
 
+            // Create a canvas element for the avatar
             const canvas = document.createElement('canvas');
             canvas.width = 50;
             canvas.height = 50;
             const ctx = canvas.getContext('2d');
 
+            // Draw circle background
             ctx.fillStyle = color;
             ctx.beginPath();
             ctx.arc(25, 25, 25, 0, 2 * Math.PI);
             ctx.fill();
 
+            // Draw letter
             ctx.fillStyle = 'white';
             ctx.font = 'bold 20px Arial';
             ctx.textAlign = 'center';
@@ -380,13 +261,10 @@
             return canvas.toDataURL();
         }
 
-        // 模拟 API 调用 - Mock API call
         async function loadMemorials() {
             try {
-                // 模拟网络延迟
-                await new Promise(resolve => setTimeout(resolve, 500));
-                
-                allMemorials = MOCK_MEMORIALS;
+                const response = await fetch('/api/memorials');
+                allMemorials = await response.json();
                 displayMemorials(allMemorials);
                 updateFloatingAvatars(allMemorials);
             } catch (error) {
@@ -395,7 +273,7 @@
                     <div class="empty-state">
                         <h3>Failed to load memorials</h3>
                         <p>Please refresh the page to try again</p>
-                        <a href="create-static.html" class="nav-btn nav-btn-purple">Create a Memorial</a>
+                        <a href="/create" class="nav-btn nav-btn-purple">Create a Memorial</a>
                     </div>
                 `;
             }
@@ -408,14 +286,17 @@
                 if (index < memorials.length) {
                     const memorial = memorials[index];
                     if (memorial.photos && memorial.photos.length > 0) {
+                        // Update avatar to show pet photo instead of emoji
                         avatar.style.backgroundImage = `url('${memorial.photos[0]}')`;
                         avatar.style.backgroundSize = 'cover';
                         avatar.style.backgroundPosition = 'center';
                         avatar.style.backgroundRepeat = 'no-repeat';
                         
+                        // Add click handler to open memorial
                         avatar.style.cursor = 'pointer';
                         avatar.onclick = () => openModal(memorial);
                         
+                        // Add title for tooltip
                         avatar.title = memorial.petName;
                     }
                 }
@@ -430,7 +311,7 @@
                     <div class="empty-state">
                         <h3>No pet memorials yet</h3>
                         <p>Be the first to create a beautiful memorial for your beloved pet</p>
-                        <a href="create-static.html" class="nav-btn nav-btn-purple">Create the first memorial</a>
+                        <a href="/create" class="nav-btn nav-btn-purple">Create the first memorial</a>
                     </div>
                 `;
                 return;
@@ -467,6 +348,7 @@
                     day: 'numeric'
                 });
 
+                // Create elements properly to avoid HTML encoding issues
                 const header = document.createElement('div');
                 header.className = 'memorial-header';
 
@@ -475,6 +357,7 @@
                 avatar.alt = memorial.petName;
                 avatar.className = 'memorial-avatar';
 
+                // Set fallback for failed image loads
                 avatar.onerror = function() {
                     this.src = generatePlaceholderAvatar(memorial.petName);
                 };
@@ -529,6 +412,7 @@
         function openModal(memorial) {
             currentMemorialId = memorial.id;
 
+            // Update modal content
             document.getElementById('modalPetName').textContent = memorial.petName;
             document.getElementById('tabPetName').textContent = memorial.petName;
             document.getElementById('tabPetName2').textContent = memorial.petName;
@@ -549,10 +433,12 @@
             const dateRange = birthDate && deathDate ? `${birthDate} - ${deathDate}` : '';
             document.getElementById('modalDates').textContent = dateRange;
 
+            // Set main image
             if (memorial.photos && memorial.photos.length > 0) {
                 document.getElementById('modalMainImage').src = memorial.photos[0];
                 document.getElementById('modalMainImage').style.display = 'block';
             } else {
+                // Show placeholder image
                 document.getElementById('modalMainImage').src = generatePlaceholderAvatar(memorial.petName);
                 document.getElementById('modalMainImage').style.display = 'block';
                 document.getElementById('modalMainImage').style.width = '200px';
@@ -561,6 +447,7 @@
                 document.getElementById('modalMainImage').style.margin = '20px auto';
             }
 
+            // Update tab content safely
             const memoryContent = document.getElementById('memoryContent');
             const memoryAuthor = document.getElementById('memoryAuthor');
             const memoryLocation = document.getElementById('memoryLocation');
@@ -576,6 +463,7 @@
             storyAuthor.textContent = `— ${memorial.ownerName}`;
             storyLocation.textContent = `Location • ${new Date(memorial.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
 
+            // Show modal
             document.getElementById('memorialModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
@@ -587,6 +475,7 @@
         }
 
         function showTab(tabName) {
+            // Hide all tabs
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
             });
@@ -594,6 +483,7 @@
                 btn.classList.remove('active');
             });
 
+            // Show selected tab
             document.getElementById(tabName + '-tab').classList.add('active');
             event.target.classList.add('active');
         }
@@ -620,19 +510,21 @@
         document.getElementById('searchByPet').addEventListener('input', searchMemorials);
         document.getElementById('searchByOwner').addEventListener('input', searchMemorials);
 
+        // Close modal when clicking outside
         document.getElementById('memorialModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeModal();
             }
         });
 
+        // Close modal with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && document.getElementById('memorialModal').style.display === 'flex') {
                 closeModal();
             }
         });
 
-        // 模拟蜡烛提交 - Mock candle submission
+        // Handle candle form submission
         document.getElementById('candleForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
@@ -646,11 +538,23 @@
             }
 
             try {
-                // 模拟提交
-                await new Promise(resolve => setTimeout(resolve, 800));
-                
-                alert('Your candle has been lit successfully! (Demo Mode - Not saved)');
-                document.getElementById('candleForm').reset();
+                const response = await fetch(`/api/memorial/${currentMemorialId}/candle`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: message || 'Lit a candle in memory',
+                        senderName: name
+                    })
+                });
+
+                if (response.ok) {
+                    alert('Your candle has been lit successfully!');
+                    document.getElementById('candleForm').reset();
+                } else {
+                    throw new Error('Failed to light candle');
+                }
             } catch (error) {
                 console.error('Failed to light candle:', error);
                 alert('Failed to light candle. Please try again.');
@@ -662,5 +566,3 @@
     </script>
 </body>
 </html>
-
-
