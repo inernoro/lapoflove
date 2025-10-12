@@ -44,9 +44,7 @@ Thumbs.db
 
 # Optional eslint cache
 .eslintcache
-
-# Build output
-dist/
+ 
 build/
 
 # Uploads (user-generated content)

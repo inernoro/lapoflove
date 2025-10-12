@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "dev:static": "npx http-server public -p 3000 -o index-static.html",
+    "build": "node build-static.js",
+    "build:server": "node build-server.js"
   },
   "dependencies": {
     "express": "^4.18.2",
@@ -13,6 +16,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "http-server": "^14.1.1"
   }
 }
