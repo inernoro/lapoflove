@@ -146,11 +146,11 @@
                         <div style="margin-bottom: 15px;">
                             <label style="display: flex; align-items: center; margin-bottom: 10px;">
                                 <input type="radio" name="photoOption" value="upload" style="margin-right: 8px;" checked onchange="togglePhotoOption()">
-                                Upload your own photos
+                                上传自己的照片
                             </label>
                             <label style="display: flex; align-items: center;">
                                 <input type="radio" name="photoOption" value="demo" style="margin-right: 8px;" onchange="togglePhotoOption()">
-                                Use a demo pet photo
+                                使用我们精选的照片（适用高速CDN加持）
                             </label>
                         </div>
 
@@ -180,11 +180,66 @@
                         <div id="photoPreview" class="photo-gallery" style="margin-top: 20px;"></div>
                     </div>
 
-                    <button type="submit" class="submit-btn" style="width: 100%; padding: 15px;">Create Memorial (Demo)</button>
+                    <!-- Personal Information Section -->
+                    <div class="form-section-title" style="margin-top: 40px; margin-bottom: 20px;">
+                        <h3 style="font-size: 20px; font-weight: 600; color: #1f2937;">Personal Information</h3>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">First Name*</label>
+                            <input type="text" id="firstName" name="firstName" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" class="form-input">
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="email" class="form-label">Email Address*</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="memoryMessage" class="form-label">Leave a message in memory of your pet*</label>
+                        <textarea id="memoryMessage" name="memoryMessage" class="form-textarea" placeholder="Share a special memory or message..." required style="min-height: 120px;"></textarea>
+                    </div>
+
+                    <div class="form-group full-width" style="margin-bottom: 20px;">
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="checkbox" id="displayName" name="displayName" style="width: 20px; height: 20px; margin-right: 10px; cursor: pointer;" checked>
+                            <span style="font-size: 14px; color: #4b5563;">Would you like your name displayed with your memorial?</span>
+                        </label>
+                    </div>
+
+                    <!-- Share Memorial Section -->
+                    <div class="form-section-title" style="margin-top: 30px; margin-bottom: 15px;">
+                        <h3 style="font-size: 18px; font-weight: 600; color: #1f2937;">Would you like to share your memorial with friends or family?</h3>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <input type="text" id="shareEmails" name="shareEmails" class="form-input" placeholder="Email addresses of friends to share your memorial with">
+                    </div>
+
+                    <button type="submit" class="submit-btn" style="width: 100%; padding: 15px; background: #6366f1; font-size: 16px;">Create Memorial</button>
                 </form>
             </div>
         </div>
     </section>
+
+    <!-- Thank You Modal -->
+    <div id="thankYouModal" class="thank-you-modal">
+        <div class="thank-you-content">
+            <button class="thank-you-close" onclick="closeThankYouModal()">×</button>
+            <div class="thank-you-icon">🕯️</div>
+            <h2 class="thank-you-title">Thank you for submitting your memorial</h2>
+            <p class="thank-you-message">
+                We will post it within 5 business days and you will receive an email letting you know your angel's memorial is ready to view.
+            </p>
+            <button class="thank-you-btn" onclick="closeThankYouModal()">确定</button>
+        </div>
+    </div>
 
     <style>
         .demo-photo {
@@ -206,6 +261,45 @@
             border-color: #8B5CF6;
             box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
         }
+
+        .photo-preview-item {
+            position: relative;
+            display: inline-block;
+        }
+        .photo-preview-item img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+        }
+        .photo-remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .photo-remove-btn:hover {
+            background: rgb(220, 38, 38);
+            transform: scale(1.1);
+        }
+        .photo-counter {
+            margin-top: 10px;
+            color: #666;
+            font-size: 14px;
+        }
     </style>
 
     <script>
@@ -213,6 +307,10 @@
         const photosInput = document.getElementById('photos');
         const photoPreview = document.getElementById('photoPreview');
         let selectedDemoPhoto = null;
+        
+        // 存储已选择的文件
+        let selectedFiles = [];
+        const MAX_PHOTOS = 6;
 
         // 切换图片选择方式
         function togglePhotoOption() {
@@ -223,12 +321,13 @@
             if (photoOption === 'upload') {
                 uploadArea.style.display = 'block';
                 demoArea.style.display = 'none';
-                photoPreview.innerHTML = '';
+                updatePhotoPreview();
                 selectedDemoPhoto = null;
             } else {
                 uploadArea.style.display = 'none';
                 demoArea.style.display = 'block';
                 photoPreview.innerHTML = '';
+                selectedFiles = [];
                 photosInput.value = '';
             }
         }
@@ -250,22 +349,83 @@
             `;
         }
 
-        photosInput.addEventListener('change', function(e) {
+        // 更新照片预览
+        function updatePhotoPreview() {
             photoPreview.innerHTML = '';
-            const files = Array.from(e.target.files);
-
-            files.forEach(file => {
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.className = 'gallery-image';
-                        photoPreview.appendChild(img);
+            
+            selectedFiles.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const container = document.createElement('div');
+                    container.className = 'photo-preview-item';
+                    
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    
+                    const removeBtn = document.createElement('button');
+                    removeBtn.className = 'photo-remove-btn';
+                    removeBtn.innerHTML = '×';
+                    removeBtn.type = 'button';
+                    removeBtn.onclick = function() {
+                        removePhoto(index);
                     };
-                    reader.readAsDataURL(file);
-                }
+                    
+                    container.appendChild(img);
+                    container.appendChild(removeBtn);
+                    photoPreview.appendChild(container);
+                };
+                reader.readAsDataURL(file);
             });
+            
+            // 显示照片计数
+            const counter = document.createElement('div');
+            counter.className = 'photo-counter';
+            counter.textContent = `已选择 ${selectedFiles.length}/${MAX_PHOTOS} 张照片`;
+            if (selectedFiles.length >= MAX_PHOTOS) {
+                counter.style.color = '#dc2626';
+                counter.textContent += ' (已达上限)';
+            }
+            photoPreview.appendChild(counter);
+        }
+
+        // 删除照片
+        function removePhoto(index) {
+            selectedFiles.splice(index, 1);
+            updatePhotoPreview();
+            
+            // 更新input的files（需要重新创建DataTransfer）
+            const dt = new DataTransfer();
+            selectedFiles.forEach(file => dt.items.add(file));
+            photosInput.files = dt.files;
+        }
+
+        photosInput.addEventListener('change', function(e) {
+            const newFiles = Array.from(e.target.files);
+            
+            // 计算还能添加多少张照片
+            const remainingSlots = MAX_PHOTOS - selectedFiles.length;
+            
+            if (remainingSlots <= 0) {
+                alert(`最多只能上传 ${MAX_PHOTOS} 张照片！`);
+                photosInput.value = '';
+                return;
+            }
+            
+            // 只添加允许数量的照片
+            const filesToAdd = newFiles.slice(0, remainingSlots).filter(file => file.type.startsWith('image/'));
+            
+            if (filesToAdd.length < newFiles.length) {
+                alert(`最多只能上传 ${MAX_PHOTOS} 张照片，已为您选择前 ${filesToAdd.length} 张。`);
+            }
+            
+            // 添加新文件到已选择列表
+            selectedFiles = [...selectedFiles, ...filesToAdd];
+            
+            // 更新预览
+            updatePhotoPreview();
+            
+            // 清空input以便下次可以选择相同的文件
+            photosInput.value = '';
         });
 
         form.addEventListener('submit', async function(e) {
@@ -299,17 +459,7 @@
                 }
 
                 // 显示成功消息
-                alert(`Memorial Created Successfully! (Demo Mode)
-
-Pet Name: ${petName}
-Owner: ${ownerName}
-Story: ${story.substring(0, 50)}...
-Photo: ${photoUrl}
-
-Note: This is a demo version. In the full version, your memorial would be saved to the database.`);
-
-                // 重定向到主页
-                window.location.href = 'index-static.html';
+                showThankYouModal();
             } catch (error) {
                 console.error('Failed to create memorial:', error);
                 alert('Failed to create memorial. Please try again.');
@@ -339,9 +489,39 @@ Note: This is a demo version. In the full version, your memorial would be saved 
             this.style.borderColor = '#d1d5db';
             this.style.backgroundColor = '#f9fafb';
 
-            const files = e.dataTransfer.files;
-            photosInput.files = files;
-            photosInput.dispatchEvent(new Event('change'));
+            const files = Array.from(e.dataTransfer.files);
+            const remainingSlots = MAX_PHOTOS - selectedFiles.length;
+            
+            if (remainingSlots <= 0) {
+                alert(`最多只能上传 ${MAX_PHOTOS} 张照片！`);
+                return;
+            }
+            
+            const filesToAdd = files.slice(0, remainingSlots).filter(file => file.type.startsWith('image/'));
+            
+            if (filesToAdd.length < files.length) {
+                alert(`最多只能上传 ${MAX_PHOTOS} 张照片，已为您添加 ${filesToAdd.length} 张。`);
+            }
+            
+            selectedFiles = [...selectedFiles, ...filesToAdd];
+            updatePhotoPreview();
+        });
+
+        // Thank You Modal Functions
+        function showThankYouModal() {
+            document.getElementById('thankYouModal').classList.add('show');
+        }
+
+        function closeThankYouModal() {
+            document.getElementById('thankYouModal').classList.remove('show');
+            window.location.href = 'index-static.html';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('thankYouModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeThankYouModal();
+            }
         });
     </script>
 </body>
