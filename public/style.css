@@ -807,7 +807,7 @@ body {
 .photo-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 15px;
+  gap: 10px;
   margin: 20px 0;
 }
 
