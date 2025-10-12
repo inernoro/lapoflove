@@ -255,7 +255,7 @@
         // 从 data/memorials.json 加载真实数据
         async function loadMemorials() {
             try {
-                const response = await fetch('data/memorials.json');
+                const response = await fetch('./data/memorials.json');
                 if (!response.ok) {
                     throw new Error('Failed to fetch memorials');
                 }
