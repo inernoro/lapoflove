@@ -46,6 +46,26 @@ if (fs.existsSync(demoImagesDir)) {
   console.log(`✓ Copied demo-images directory (${images.length} files)`);
 }
 
+// 复制 data 目录（memorials.json）
+const dataDir = path.join(__dirname, 'data');
+const destDataDir = path.join(__dirname, 'dist/data');
+
+if (fs.existsSync(dataDir)) {
+  if (!fs.existsSync(destDataDir)) {
+    fs.mkdirSync(destDataDir, { recursive: true });
+  }
+  
+  const dataFiles = fs.readdirSync(dataDir);
+  dataFiles.forEach(file => {
+    if (file.endsWith('.json')) {
+      const srcPath = path.join(dataDir, file);
+      const destPath = path.join(destDataDir, file);
+      fs.copyFileSync(srcPath, destPath);
+    }
+  });
+  console.log(`✓ Copied data directory (${dataFiles.filter(f => f.endsWith('.json')).length} JSON files)`);
+}
+
 // 创建 .nojekyll 文件（GitHub Pages 需要）
 fs.writeFileSync(path.join(distDir, '.nojekyll'), '');
 console.log('✓ Created .nojekyll file');

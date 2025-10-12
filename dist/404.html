@@ -224,128 +224,6 @@
     </div>
 
     <script>
-        // Mock API Data - 模拟后端数据
-        const MOCK_MEMORIALS = [
-  {
-    "id": "memorial-001",
-    "petName": "Maverick",
-    "ownerName": "Liz",
-    "story": "Home feels so much emptier without your presence. You were the most loyal companion, always by my side through every adventure. Your gentle soul and playful spirit brought so much joy to our family. I miss your morning greetings and the way you'd curl up next to me on cold nights. Until we meet again, sweet boy.",
-    "birthDate": "2012-08-06",
-    "deathDate": "2025-10-06",
-    "photos": [
-      "demo-images/golden-retriever.jpg"
-    ],
-    "candles": [
-      {
-        "id": "candle-001",
-        "message": "Maverick was such a special dog. He will be deeply missed by all who knew him.",
-        "senderName": "Sarah Johnson",
-        "createdAt": "2025-10-07T10:30:00.000Z"
-      }
-    ],
-    "createdAt": "2025-10-08T09:15:00.000Z"
-  },
-  {
-    "id": "memorial-002",
-    "petName": "Maggie",
-    "ownerName": "Katy",
-    "story": "Maggie was my first child, more than a pet. She was with me through every single life event. My most loyal companion. So loved. I have no words the feeling of emptiness I feel now. You were the kindest little girl in the world.",
-    "birthDate": "2004-04-05",
-    "deathDate": "2025-10-06",
-    "photos": [
-      "demo-images/orange-cat.jpg"
-    ],
-    "candles": [],
-    "createdAt": "2025-10-08T08:20:00.000Z"
-  },
-  {
-    "id": "memorial-003",
-    "petName": "Sochi",
-    "ownerName": "Savannah",
-    "story": "My best friend, my north star, my Honey Bear/Baby Man/Baby Love/Sochi Love (and everything else I called you). I love you more than anything else and always will. You are my world. You are my everything. I love you sweetheart, my sweet boy.",
-    "birthDate": "2013-12-28",
-    "deathDate": "2025-10-06",
-    "photos": [
-      "demo-images/small-dog.jpg"
-    ],
-    "candles": [
-      {
-        "id": "candle-002",
-        "message": "Sochi was such a loving companion. Sending you comfort during this difficult time.",
-        "senderName": "Michael Chen",
-        "createdAt": "2025-10-07T14:20:00.000Z"
-      }
-    ],
-    "createdAt": "2025-10-08T07:50:00.000Z"
-  },
-  {
-    "id": "memorial-004",
-    "petName": "Elvis",
-    "ownerName": "Josie",
-    "story": "Elvis was small but had the biggest personality. He loved wading in creeks or swimming in my mom's pool with the kids. When he was young and spry he would zoom around the living room or out in the sunshine in the backyard.",
-    "birthDate": "2011-05-25",
-    "deathDate": "2025-10-06",
-    "photos": [
-      "demo-images/puppy.jpg"
-    ],
-    "candles": [],
-    "createdAt": "2025-10-08T06:45:00.000Z"
-  },
-  {
-    "id": "memorial-005",
-    "petName": "Mia",
-    "ownerName": "Lisa",
-    "story": "Forever wouldn't have been enough time with you. You are dearly missed and will be in my heart forever.",
-    "birthDate": "2007-02-11",
-    "deathDate": "2025-10-10",
-    "photos": [
-      "demo-images/white-cat.jpg"
-    ],
-    "candles": [],
-    "createdAt": "2025-10-07T15:30:00.000Z"
-  },
-  {
-    "id": "memorial-006",
-    "petName": "Le Chat",
-    "ownerName": "Mark",
-    "story": "Rest easy, my kitty until we meet again at the end of all things.",
-    "birthDate": "2004-04-07",
-    "deathDate": "2025-09-24",
-    "photos": [
-      "demo-images/black-cat.jpg"
-    ],
-    "candles": [],
-    "createdAt": "2025-10-07T12:20:00.000Z"
-  },
-  {
-    "id": "memorial-007",
-    "petName": "Buddy",
-    "ownerName": "Jason",
-    "story": "I love and miss you so much buddy, you were such a good dog and now the house is a lot more quiet without you here. I hope you are resting well and enjoyed all the good food you had.",
-    "birthDate": "2012-05-28",
-    "deathDate": "2025-10-03",
-    "photos": [
-      "demo-images/beagle.jpg"
-    ],
-    "candles": [],
-    "createdAt": "2025-10-07T09:00:00.000Z"
-  },
-  {
-    "id": "memorial-008",
-    "petName": "Lily",
-    "ownerName": "Jennifer",
-    "story": "My sweet little baby, my sweet little girl. You were the kindest little girl in the world. Even when others brought you pain, you never lashed out, because love was at the core of who you are.",
-    "birthDate": "2014-09-11",
-    "deathDate": "2025-10-05",
-    "photos": [
-      "demo-images/gray-cat.jpg"
-    ],
-    "candles": [],
-    "createdAt": "2025-10-06T14:30:00.000Z"
-  }
-];
-
         let allMemorials = [];
         let currentMemorialId = null;
 
@@ -374,13 +252,41 @@
             return canvas.toDataURL();
         }
 
-        // 模拟 API 调用 - Mock API call
+        // 从 data/memorials.json 加载真实数据
         async function loadMemorials() {
             try {
-                // 模拟网络延迟
-                await new Promise(resolve => setTimeout(resolve, 500));
+                const response = await fetch('data/memorials.json');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch memorials');
+                }
+                const data = await response.json();
                 
-                allMemorials = MOCK_MEMORIALS;
+                // 过滤掉已删除的和测试数据，只显示有效的纪念
+                allMemorials = data.filter(m => {
+                    // 过滤掉测试数据（petName为"1"或"s"等）
+                    if (m.petName.length <= 1 || m.story.length <= 1) {
+                        return false;
+                    }
+                    // 只显示状态为active的
+                    return m.status === 'active' || !m.status;
+                }).map(memorial => {
+                    // 处理图片路径，确保相对路径正确
+                    if (memorial.photos && memorial.photos.length > 0) {
+                        memorial.photos = memorial.photos.map(photo => {
+                            // 如果是绝对URL（如unsplash），直接使用
+                            if (photo.startsWith('http://') || photo.startsWith('https://')) {
+                                return photo;
+                            }
+                            // 如果路径以/开头，去掉/
+                            if (photo.startsWith('/')) {
+                                return photo.substring(1);
+                            }
+                            return photo;
+                        });
+                    }
+                    return memorial;
+                });
+                
                 displayMemorials(allMemorials);
                 updateFloatingAvatars(allMemorials);
             } catch (error) {
