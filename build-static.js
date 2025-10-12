@@ -3,11 +3,15 @@ const path = require('path');
 
 console.log('Building static version for GitHub Pages...');
 
-// 创建 dist 目录
+// 创建 dist 目录（先清空）
 const distDir = path.join(__dirname, 'dist');
-if (!fs.existsSync(distDir)) {
-  fs.mkdirSync(distDir, { recursive: true });
+if (fs.existsSync(distDir)) {
+  // 清空 dist 目录
+  fs.rmSync(distDir, { recursive: true, force: true });
+  console.log('✓ Cleaned dist directory');
 }
+fs.mkdirSync(distDir, { recursive: true });
+console.log('✓ Created dist directory');
 
 // 复制静态文件
 const filesToCopy = [
