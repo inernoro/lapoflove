@@ -297,6 +297,41 @@ app.delete('/api/admin/ban-user/:id', (req, res) => {
   }
 });
 
+// 删除用户
+app.delete('/api/admin/user/:ownerName', (req, res) => {
+  if (!isAdmin(req)) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+  
+  const ownerName = decodeURIComponent(req.params.ownerName);
+  const users = getUsers();
+  const filteredUsers = users.filter(user => user.ownerName !== ownerName);
+  
+  if (filteredUsers.length < users.length) {
+    saveUsers(filteredUsers);
+    res.json({ success: true, message: 'User deleted successfully' });
+  } else {
+    res.status(404).json({ error: 'User not found' });
+  }
+});
+
+// 删除封禁记录
+app.delete('/api/admin/ban-record/:id', (req, res) => {
+  if (!isAdmin(req)) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+  
+  const bannedUsers = getBannedUsers();
+  const filteredUsers = bannedUsers.filter(user => user.id !== req.params.id);
+  
+  if (filteredUsers.length < bannedUsers.length) {
+    saveBannedUsers(filteredUsers);
+    res.json({ success: true, message: 'Ban record deleted successfully' });
+  } else {
+    res.status(404).json({ error: 'Ban record not found' });
+  }
+});
+
 // 批量生成demo数据（使用随机CDN图片）
 app.post('/api/admin/generate-demo-data', (req, res) => {
   if (!isAdmin(req)) {

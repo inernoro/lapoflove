@@ -12,60 +12,170 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #333;
+            min-height: 100vh;
+        }
+
+        /* 登录页面样式 */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .login-box {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 400px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-box h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .login-box .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .login-icon {
+            text-align: center;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* 主应用样式 */
+        #app {
+            display: none;
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        #app.active {
+            display: block;
         }
 
         .header {
-            background: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .header h1 {
             margin: 0;
+            font-size: 1.8rem;
+            font-weight: 600;
         }
 
-        .admin-key {
-            background: #34495e;
-            padding: 1rem 2rem;
-            color: #ecf0f1;
-            font-family: monospace;
+        .header-right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .admin-info {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .logout-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 2rem auto;
-            padding: 0 1rem;
+            padding: 0 2rem;
         }
 
         .tabs {
             display: flex;
             background: white;
-            border-radius: 8px 8px 0 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
         }
 
         .tab {
-            padding: 1rem 2rem;
+            padding: 1.2rem 2rem;
             cursor: pointer;
             border-bottom: 3px solid transparent;
             transition: all 0.3s;
+            font-weight: 500;
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .tab:hover {
+            background: #f8f9fa;
         }
 
         .tab.active {
-            background: #3498db;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border-bottom-color: #2980b9;
+            border-bottom-color: #5a67d8;
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #5a67d8;
         }
 
         .tab-content {
             background: white;
-            padding: 2rem;
-            border-radius: 0 0 8px 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 2.5rem;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             min-height: 600px;
         }
 
@@ -75,124 +185,181 @@
 
         .tab-panel.active {
             display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
         }
 
         .stat-card {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 1.5rem;
-            border-radius: 8px;
+            padding: 2rem;
+            border-radius: 16px;
             text-align: center;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: default;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
         }
 
         .stat-number {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: bold;
             margin-bottom: 0.5rem;
         }
 
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
         .btn {
-            background: #3498db;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
             padding: 0.75rem 1.5rem;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 0.9rem;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
         }
 
         .btn:hover {
-            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
         }
 
         .btn-danger {
-            background: #e74c3c;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 2px 8px rgba(245, 87, 108, 0.3);
         }
 
         .btn-danger:hover {
-            background: #c0392b;
+            box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
         }
 
         .btn-success {
-            background: #27ae60;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            box-shadow: 0 2px 8px rgba(79, 172, 254, 0.3);
         }
 
         .btn-success:hover {
-            background: #219a52;
+            box-shadow: 0 4px 12px rgba(79, 172, 254, 0.4);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            box-shadow: 0 2px 8px rgba(250, 112, 154, 0.3);
+        }
+
+        .btn-warning:hover {
+            box-shadow: 0 4px 12px rgba(250, 112, 154, 0.4);
         }
 
         .table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
         .table th,
         .table td {
-            padding: 1rem;
+            padding: 1.2rem;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #e9ecef;
         }
 
         .table th {
-            background: #f8f9fa;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
         }
 
-        .table tr:hover {
+        .table tbody tr {
+            transition: all 0.3s;
+        }
+
+        .table tbody tr:hover {
             background: #f8f9fa;
+            transform: scale(1.01);
         }
 
         .status-badge {
-            padding: 0.25rem 0.75rem;
+            padding: 0.35rem 0.85rem;
             border-radius: 20px;
             font-size: 0.8rem;
-            font-weight: 500;
+            font-weight: 600;
+            display: inline-block;
         }
 
         .status-active {
-            background: #d4edda;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
             color: #155724;
         }
 
         .status-deleted {
-            background: #f8d7da;
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
             color: #721c24;
         }
 
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            color: #2c3e50;
         }
 
         .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 0.85rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
             font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
         .memorial-photo {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             object-fit: cover;
-            border-radius: 50%;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .actions {
@@ -208,8 +375,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             z-index: 1000;
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
@@ -218,54 +386,124 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: white;
-            padding: 2rem;
-            border-radius: 8px;
+            padding: 2.5rem;
+            border-radius: 16px;
             width: 90%;
             max-width: 500px;
             max-height: 80vh;
             overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -45%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
         }
 
         .close {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
-            color: #666;
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .close:hover {
+            color: #333;
         }
 
         .loading {
             text-align: center;
-            padding: 2rem;
-            color: #666;
+            padding: 3rem;
+            color: #999;
+            font-size: 1.1rem;
         }
 
         .error {
-            background: #f8d7da;
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
             color: #721c24;
-            padding: 1rem;
-            border-radius: 4px;
+            padding: 1.2rem;
+            border-radius: 12px;
             margin: 1rem 0;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(245, 87, 108, 0.2);
         }
 
         .success {
-            background: #d4edda;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
             color: #155724;
-            padding: 1rem;
-            border-radius: 4px;
+            padding: 1.2rem;
+            border-radius: 12px;
             margin: 1rem 0;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(79, 172, 254, 0.2);
+        }
+
+        .section-title {
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: #2c3e50;
+            font-weight: 600;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, #667eea 0%, #764ba2 100%) 1;
+            padding-bottom: 0.5rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🐾 宠物纪念馆管理后台</h1>
+    <!-- 登录页面 -->
+    <div id="loginPage" class="login-container">
+        <div class="login-box">
+            <div class="login-icon">🐾</div>
+            <h1>管理后台</h1>
+            <p class="subtitle">宠物纪念馆管理系统</p>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>用户名</label>
+                    <input type="text" id="username" placeholder="请输入用户名" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label>密码</label>
+                    <input type="password" id="password" placeholder="请输入密码" required autocomplete="current-password">
+                </div>
+                <div id="loginError" class="error" style="display: none;"></div>
+                <button type="submit" class="btn" style="width: 100%; padding: 1rem; font-size: 1rem;">登录</button>
+            </form>
+        </div>
     </div>
 
-    <div class="admin-key">
-        <strong>管理员密钥:</strong> lapoflove-admin-2025 （请在API请求中使用此密钥）
-    </div>
+    <!-- 主应用 -->
+    <div id="app">
+        <div class="header">
+            <h1>🐾 宠物纪念馆管理后台</h1>
+            <div class="header-right">
+                <div class="admin-info">
+                    👤 管理员
+                </div>
+                <button class="logout-btn" onclick="handleLogout()">退出登录</button>
+            </div>
+        </div>
 
     <div class="container">
         <div class="tabs">
@@ -278,23 +516,23 @@
         <div class="tab-content">
             <!-- 概览面板 -->
             <div id="overview" class="tab-panel active">
-                <h2>系统概览</h2>
+                <h2 style="margin-bottom: 2rem; color: #2c3e50; font-size: 1.8rem;">📊 系统概览</h2>
                 <div class="stats">
                     <div class="stat-card">
                         <div class="stat-number" id="totalMemorials">-</div>
-                        <div>总纪念册数</div>
+                        <div class="stat-label">总纪念册数</div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
                         <div class="stat-number" id="activeMemorials">-</div>
-                        <div>活跃纪念册</div>
+                        <div class="stat-label">活跃纪念册</div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
                         <div class="stat-number" id="totalUsers">-</div>
-                        <div>注册用户</div>
+                        <div class="stat-label">注册用户</div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
                         <div class="stat-number" id="bannedUsers">-</div>
-                        <div>封禁用户</div>
+                        <div class="stat-label">封禁用户</div>
                     </div>
                 </div>
             </div>
@@ -361,8 +599,57 @@
 
     <script>
         const ADMIN_KEY = 'lapoflove-admin-2025';
+        const ADMIN_USERNAME = 'admin';
+        const ADMIN_PASSWORD = 'lapoflove2025';
+        
         let currentMemorials = [];
         let currentUsers = [];
+
+        // 登录处理
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('loginError');
+            
+            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                // 登录成功，保存到sessionStorage
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('app').classList.add('active');
+                loadOverview();
+            } else {
+                // 登录失败
+                errorDiv.textContent = '用户名或密码错误';
+                errorDiv.style.display = 'block';
+            }
+        }
+
+        // 退出登录
+        function handleLogout() {
+            if (confirm('确定要退出登录吗？')) {
+                sessionStorage.removeItem('adminLoggedIn');
+                document.getElementById('app').classList.remove('active');
+                document.getElementById('loginPage').style.display = 'flex';
+                // 清空表单
+                document.getElementById('username').value = '';
+                document.getElementById('password').value = '';
+                document.getElementById('loginError').style.display = 'none';
+            }
+        }
+
+        // 检查登录状态
+        function checkLoginStatus() {
+            const isLoggedIn = sessionStorage.getItem('adminLoggedIn') === 'true';
+            if (isLoggedIn) {
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('app').classList.add('active');
+                loadOverview();
+            } else {
+                document.getElementById('loginPage').style.display = 'flex';
+                document.getElementById('app').classList.remove('active');
+            }
+        }
 
         // API调用函数
         async function apiCall(url, options = {}) {
@@ -484,7 +771,8 @@
                 currentUsers = data;
                 
                 const html = `
-                    <h3>注册用户</h3>
+                    <h3 class="section-title">👥 注册用户</h3>
+                    ${data.users.length > 0 ? `
                     <table class="table">
                         <thead>
                             <tr>
@@ -499,20 +787,23 @@
                         <tbody>
                             ${data.users.map(user => `
                                 <tr>
-                                    <td>${user.ownerName}</td>
-                                    <td>${new Date(user.firstPostDate).toLocaleDateString('zh-CN')}</td>
-                                    <td>${new Date(user.lastPostDate).toLocaleDateString('zh-CN')}</td>
-                                    <td>${user.totalPosts}</td>
-                                    <td>${user.ip}</td>
+                                    <td><strong>${user.ownerName}</strong></td>
+                                    <td>${new Date(user.firstPostDate).toLocaleDateString('zh-CN', {year: 'numeric', month: '2-digit', day: '2-digit'})}</td>
+                                    <td>${new Date(user.lastPostDate).toLocaleDateString('zh-CN', {year: 'numeric', month: '2-digit', day: '2-digit'})}</td>
+                                    <td><strong>${user.totalPosts}</strong> 条</td>
+                                    <td><code>${user.ip}</code></td>
                                     <td class="actions">
-                                        <button class="btn btn-danger" onclick="openBanModal('${user.ownerName}', '${user.ip}')">封禁</button>
+                                        <button class="btn btn-danger" onclick="openBanModal('${user.ownerName}', '${user.ip}')">🚫 封禁</button>
+                                        <button class="btn btn-warning" onclick="deleteUser('${user.ownerName}')">🗑️ 删除</button>
                                     </td>
                                 </tr>
                             `).join('')}
                         </tbody>
                     </table>
+                    ` : '<div class="empty-state"><div class="empty-state-icon">📭</div><p>暂无注册用户</p></div>'}
                     
-                    <h3 style="margin-top: 2rem;">封禁用户</h3>
+                    <h3 class="section-title">🚫 封禁用户</h3>
+                    ${data.bannedUsers.length > 0 ? `
                     <table class="table">
                         <thead>
                             <tr>
@@ -526,17 +817,19 @@
                         <tbody>
                             ${data.bannedUsers.map(user => `
                                 <tr>
-                                    <td>${user.ownerName}</td>
-                                    <td>${user.ip}</td>
+                                    <td><strong>${user.ownerName}</strong></td>
+                                    <td><code>${user.ip}</code></td>
                                     <td>${user.reason}</td>
-                                    <td>${new Date(user.bannedAt).toLocaleDateString('zh-CN')}</td>
+                                    <td>${new Date(user.bannedAt).toLocaleDateString('zh-CN', {year: 'numeric', month: '2-digit', day: '2-digit'})}</td>
                                     <td class="actions">
-                                        <button class="btn btn-success" onclick="unbanUser('${user.id}')">解封</button>
+                                        <button class="btn btn-success" onclick="unbanUser('${user.id}')">✅ 解封</button>
+                                        <button class="btn btn-warning" onclick="deleteBannedUser('${user.id}')">🗑️ 删除记录</button>
                                     </td>
                                 </tr>
                             `).join('')}
                         </tbody>
                     </table>
+                    ` : '<div class="empty-state"><div class="empty-state-icon">✨</div><p>暂无封禁用户</p></div>'}
                 `;
                 
                 container.innerHTML = html;
@@ -636,6 +929,34 @@ IP: ${memorial.clientIp}
             }
         }
 
+        // 删除用户
+        async function deleteUser(ownerName) {
+            if (!confirm(`确定要删除用户"${ownerName}"吗？此操作不可恢复！`)) return;
+            
+            try {
+                await apiCall(`/api/admin/user/${encodeURIComponent(ownerName)}`, { method: 'DELETE' });
+                alert('用户删除成功');
+                loadUsers();
+                loadOverview();
+            } catch (error) {
+                alert('删除失败: ' + error.message);
+            }
+        }
+
+        // 删除封禁记录
+        async function deleteBannedUser(banId) {
+            if (!confirm('确定要删除这条封禁记录吗？此操作不可恢复！')) return;
+            
+            try {
+                await apiCall(`/api/admin/ban-record/${banId}`, { method: 'DELETE' });
+                alert('封禁记录删除成功');
+                loadUsers();
+                loadOverview();
+            } catch (error) {
+                alert('删除失败: ' + error.message);
+            }
+        }
+
         // 生成Demo数据
         async function generateDemoData() {
             const count = document.getElementById('demoCount').value;
@@ -659,7 +980,7 @@ IP: ${memorial.clientIp}
 
         // 初始化
         document.addEventListener('DOMContentLoaded', function() {
-            loadOverview();
+            checkLoginStatus();
         });
 
         // 点击模态框外部关闭
