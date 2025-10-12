@@ -248,6 +248,45 @@
             border-color: #8B5CF6;
             box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
         }
+
+        .photo-preview-item {
+            position: relative;
+            display: inline-block;
+        }
+        .photo-preview-item img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+        }
+        .photo-remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .photo-remove-btn:hover {
+            background: rgb(220, 38, 38);
+            transform: scale(1.1);
+        }
+        .photo-counter {
+            margin-top: 10px;
+            color: #666;
+            font-size: 14px;
+        }
     </style>
 
     <script>
@@ -255,6 +294,10 @@
         const photosInput = document.getElementById('photos');
         const photoPreview = document.getElementById('photoPreview');
         let selectedDemoPhoto = null;
+        
+        // 存储已选择的文件
+        let selectedFiles = [];
+        const MAX_PHOTOS = 6;
 
         // 切换图片选择方式
         function togglePhotoOption() {
@@ -265,12 +308,13 @@
             if (photoOption === 'upload') {
                 uploadArea.style.display = 'block';
                 demoArea.style.display = 'none';
-                photoPreview.innerHTML = '';
+                updatePhotoPreview();
                 selectedDemoPhoto = null;
             } else {
                 uploadArea.style.display = 'none';
                 demoArea.style.display = 'block';
                 photoPreview.innerHTML = '';
+                selectedFiles = [];
                 photosInput.value = '';
             }
         }
@@ -292,22 +336,83 @@
             `;
         }
 
-        photosInput.addEventListener('change', function(e) {
+        // 更新照片预览
+        function updatePhotoPreview() {
             photoPreview.innerHTML = '';
-            const files = Array.from(e.target.files);
-
-            files.forEach(file => {
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.className = 'gallery-image';
-                        photoPreview.appendChild(img);
+            
+            selectedFiles.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const container = document.createElement('div');
+                    container.className = 'photo-preview-item';
+                    
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    
+                    const removeBtn = document.createElement('button');
+                    removeBtn.className = 'photo-remove-btn';
+                    removeBtn.innerHTML = '×';
+                    removeBtn.type = 'button';
+                    removeBtn.onclick = function() {
+                        removePhoto(index);
                     };
-                    reader.readAsDataURL(file);
-                }
+                    
+                    container.appendChild(img);
+                    container.appendChild(removeBtn);
+                    photoPreview.appendChild(container);
+                };
+                reader.readAsDataURL(file);
             });
+            
+            // 显示照片计数
+            const counter = document.createElement('div');
+            counter.className = 'photo-counter';
+            counter.textContent = `已选择 ${selectedFiles.length}/${MAX_PHOTOS} 张照片`;
+            if (selectedFiles.length >= MAX_PHOTOS) {
+                counter.style.color = '#dc2626';
+                counter.textContent += ' (已达上限)';
+            }
+            photoPreview.appendChild(counter);
+        }
+
+        // 删除照片
+        function removePhoto(index) {
+            selectedFiles.splice(index, 1);
+            updatePhotoPreview();
+            
+            // 更新input的files（需要重新创建DataTransfer）
+            const dt = new DataTransfer();
+            selectedFiles.forEach(file => dt.items.add(file));
+            photosInput.files = dt.files;
+        }
+
+        photosInput.addEventListener('change', function(e) {
+            const newFiles = Array.from(e.target.files);
+            
+            // 计算还能添加多少张照片
+            const remainingSlots = MAX_PHOTOS - selectedFiles.length;
+            
+            if (remainingSlots <= 0) {
+                alert(`最多只能上传 ${MAX_PHOTOS} 张照片！`);
+                photosInput.value = '';
+                return;
+            }
+            
+            // 只添加允许数量的照片
+            const filesToAdd = newFiles.slice(0, remainingSlots).filter(file => file.type.startsWith('image/'));
+            
+            if (filesToAdd.length < newFiles.length) {
+                alert(`最多只能上传 ${MAX_PHOTOS} 张照片，已为您选择前 ${filesToAdd.length} 张。`);
+            }
+            
+            // 添加新文件到已选择列表
+            selectedFiles = [...selectedFiles, ...filesToAdd];
+            
+            // 更新预览
+            updatePhotoPreview();
+            
+            // 清空input以便下次可以选择相同的文件
+            photosInput.value = '';
         });
 
         form.addEventListener('submit', async function(e) {
@@ -381,9 +486,22 @@ Note: This is a demo version. In the full version, your memorial would be saved 
             this.style.borderColor = '#d1d5db';
             this.style.backgroundColor = '#f9fafb';
 
-            const files = e.dataTransfer.files;
-            photosInput.files = files;
-            photosInput.dispatchEvent(new Event('change'));
+            const files = Array.from(e.dataTransfer.files);
+            const remainingSlots = MAX_PHOTOS - selectedFiles.length;
+            
+            if (remainingSlots <= 0) {
+                alert(`最多只能上传 ${MAX_PHOTOS} 张照片！`);
+                return;
+            }
+            
+            const filesToAdd = files.slice(0, remainingSlots).filter(file => file.type.startsWith('image/'));
+            
+            if (filesToAdd.length < files.length) {
+                alert(`最多只能上传 ${MAX_PHOTOS} 张照片，已为您添加 ${filesToAdd.length} 张。`);
+            }
+            
+            selectedFiles = [...selectedFiles, ...filesToAdd];
+            updatePhotoPreview();
         });
     </script>
 </body>
