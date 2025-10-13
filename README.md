@@ -6,7 +6,13 @@
 
 **👉 [点击这里访问在线演示](https://inernoro.github.io/lapoflove/)**
 
+**👨‍💼 [管理后台演示](https://inernoro.github.io/lapoflove/admin.html)**
+
 > 注：这是GitHub Pages上的静态演示版本，展示所有功能和真实数据
+> 
+> 管理后台登录信息：
+> - 用户名：`admin`
+> - 密码：`lapoflove2025`
  
 
 静态演示版本特点：
@@ -199,6 +205,10 @@ POST /api/admin/generate-demo-data # 生成演示数据
 ```
 
 访问管理面板：`http://localhost:3000/admin`
+
+**静态演示版本管理面板**：[https://inernoro.github.io/lapoflove/admin.html](https://inernoro.github.io/lapoflove/admin.html)
+- 用户名：`admin`  
+- 密码：`lapoflove2025`
 
 ## 特色设计
 

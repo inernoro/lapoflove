@@ -17,6 +17,7 @@ console.log('✓ Created dist directory');
 const filesToCopy = [
   { src: 'public/index-static.html', dest: 'dist/index.html' },
   { src: 'public/create-static.html', dest: 'dist/create.html' },
+  { src: 'public/admin.html', dest: 'dist/admin.html' },
   { src: 'public/style.css', dest: 'dist/style.css' }
 ];
 
