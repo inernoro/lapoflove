@@ -190,8 +190,22 @@
         }
 
         async function loadData() {
+            // 检测是否在GitHub Pages等静态环境中（通过检查域名或路径）
+            const isStaticMode = window.location.hostname.includes('github.io') || 
+                                 window.location.hostname.includes('pages.dev') ||
+                                 !window.location.port || 
+                                 window.location.protocol === 'file:';
+            
+            if (isStaticMode) {
+                // 直接使用静态数据，避免404错误
+                console.log('检测到静态部署环境，使用本地静态数据');
+                currentMemorials = JSON.parse(JSON.stringify(window.STATIC_MEMORIALS || []));
+                currentUsers = JSON.parse(JSON.stringify(window.STATIC_USERS || { users: [], bannedUsers: [] }));
+                return;
+            }
+            
             try {
-                // 从API加载实际数据
+                // 在服务器模式下从API加载实际数据
                 const memorialsResponse = await fetch(`/api/admin/memorials?adminKey=${ADMIN_KEY}`);
                 const memorialsData = await memorialsResponse.json();
                 currentMemorials = memorialsData.memorials || [];

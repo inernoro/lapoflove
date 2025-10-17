@@ -124,7 +124,7 @@ window.STATIC_MEMORIALS = [
     story: 'We love you always, Tooty.',
     birthDate: '2016-05-16',
     deathDate: '2025-10-05',
-    photos: ['/demo-images/french-bulldog.jpg'],
+    photos: ['/demo-images/puppy.jpg'],
     candles: [],
     createdAt: '2025-10-07T10:05:00.000Z',
     clientIp: '198.51.100.44',
@@ -195,5 +195,7 @@ window.STATIC_DEMO_IMAGES = [
   '/demo-images/puppy.jpg',
   '/demo-images/white-cat.jpg',
   '/demo-images/black-cat.jpg',
-  '/demo-images/french-bulldog.jpg'
+  '/demo-images/beagle.jpg',
+  '/demo-images/labrador.jpg',
+  '/demo-images/gray-cat.jpg'
 ];
