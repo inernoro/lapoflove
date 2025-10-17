@@ -189,10 +189,22 @@
             }
         }
 
-        function loadData() {
-            // 深拷贝静态数据，避免直接修改原始值
-            currentMemorials = JSON.parse(JSON.stringify(window.STATIC_MEMORIALS || []));
-            currentUsers = JSON.parse(JSON.stringify(window.STATIC_USERS || { users: [], bannedUsers: [] }));
+        async function loadData() {
+            try {
+                // 从API加载实际数据
+                const memorialsResponse = await fetch(`/api/admin/memorials?adminKey=${ADMIN_KEY}`);
+                const memorialsData = await memorialsResponse.json();
+                currentMemorials = memorialsData.memorials || [];
+                
+                const usersResponse = await fetch(`/api/admin/users?adminKey=${ADMIN_KEY}`);
+                const usersData = await usersResponse.json();
+                currentUsers = usersData || { users: [], bannedUsers: [] };
+            } catch (error) {
+                console.error('加载数据失败，使用静态数据:', error);
+                // 降级到静态数据
+                currentMemorials = JSON.parse(JSON.stringify(window.STATIC_MEMORIALS || []));
+                currentUsers = JSON.parse(JSON.stringify(window.STATIC_USERS || { users: [], bannedUsers: [] }));
+            }
         }
 
         // 标签切换
@@ -249,7 +261,7 @@
                                 <tr>
                                     <td>
                                         ${memorial.photos && memorial.photos.length > 0 
-                                            ? `<img src="${memorial.photos[0]}" class="memorial-photo" alt="${memorial.petName}">` 
+                                            ? `<img src="${memorial.photos[0]}" class="memorial-photo" alt="${memorial.petName}" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%22 y=%2250%22 font-size=%2240%22 text-anchor=%22middle%22 dy=%22.3em%22%3E📷%3C/text%3E%3C/svg%3E'; this.title='图片加载失败';">` 
                                             : '📷'}
                                     </td>
                                     <td>${memorial.petName}</td>
