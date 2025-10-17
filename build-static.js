@@ -19,7 +19,8 @@ const filesToCopy = [
   { src: 'public/create-static.html', dest: 'dist/create.html' },
   { src: 'public/admin.html', dest: 'dist/admin.html' },
   { src: 'public/style.css', dest: 'dist/style.css' },
-  { src: 'public/admin.css', dest: 'dist/admin.css' }
+  { src: 'public/admin.css', dest: 'dist/admin.css' },
+  { src: 'public/admin-data.js', dest: 'dist/admin-data.js' }
 ];
 
 filesToCopy.forEach(file => {

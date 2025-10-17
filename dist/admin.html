@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>管理后台 - 宠物纪念馆</title>
     <link rel="stylesheet" href="admin.css">
+    <script src="admin-data.js"></script>
 </head>
 <body>
     <!-- 登录页面 -->
@@ -138,7 +139,7 @@
         const ADMIN_PASSWORD = 'lapoflove2025';
         
         let currentMemorials = [];
-        let currentUsers = [];
+        let currentUsers = { users: [], bannedUsers: [] };
 
         // 登录处理
         function handleLogin(event) {
@@ -152,6 +153,7 @@
                 sessionStorage.setItem('adminLoggedIn', 'true');
                 document.getElementById('loginPage').style.display = 'none';
                 document.getElementById('app').classList.add('active');
+                loadData();
                 loadOverview();
             } else {
                 // 登录失败
@@ -179,6 +181,7 @@
             if (isLoggedIn) {
                 document.getElementById('loginPage').style.display = 'none';
                 document.getElementById('app').classList.add('active');
+                loadData();
                 loadOverview();
             } else {
                 document.getElementById('loginPage').style.display = 'flex';
@@ -186,23 +189,10 @@
             }
         }
 
-        // API调用函数
-        async function apiCall(url, options = {}) {
-            const defaultOptions = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'admin-key': ADMIN_KEY
-                }
-            };
-            
-            const response = await fetch(url, { ...defaultOptions, ...options });
-            const data = await response.json();
-            
-            if (!response.ok) {
-                throw new Error(data.error || '请求失败');
-            }
-            
-            return data;
+        function loadData() {
+            // 深拷贝静态数据，避免直接修改原始值
+            currentMemorials = JSON.parse(JSON.stringify(window.STATIC_MEMORIALS || []));
+            currentUsers = JSON.parse(JSON.stringify(window.STATIC_USERS || { users: [], bannedUsers: [] }));
         }
 
         // 标签切换
@@ -225,30 +215,23 @@
         }
 
         // 加载概览数据
-        async function loadOverview() {
+        function loadOverview() {
             try {
-                const [memorials, users] = await Promise.all([
-                    apiCall('/api/admin/memorials'),
-                    apiCall('/api/admin/users')
-                ]);
-                
-                document.getElementById('totalMemorials').textContent = memorials.length;
-                document.getElementById('activeMemorials').textContent = memorials.filter(m => !m.deleted).length;
-                document.getElementById('totalUsers').textContent = users.users.length;
-                document.getElementById('bannedUsers').textContent = users.bannedUsers.length;
+                document.getElementById('totalMemorials').textContent = currentMemorials.length;
+                document.getElementById('activeMemorials').textContent = currentMemorials.filter(m => !m.deleted).length;
+                document.getElementById('totalUsers').textContent = currentUsers.users.length;
+                document.getElementById('bannedUsers').textContent = currentUsers.bannedUsers.length;
             } catch (error) {
                 console.error('加载概览数据失败:', error);
             }
         }
 
         // 加载纪念册数据
-        async function loadMemorials() {
+        function loadMemorials() {
             const container = document.getElementById('memorialsContent');
             container.innerHTML = '<div class="loading">加载中...</div>';
-            
+
             try {
-                currentMemorials = await apiCall('/api/admin/memorials');
-                
                 const html = `
                     <table class="table">
                         <thead>
@@ -297,14 +280,13 @@
         }
 
         // 加载用户数据
-        async function loadUsers() {
+        function loadUsers() {
             const container = document.getElementById('usersContent');
             container.innerHTML = '<div class="loading">加载中...</div>';
-            
+
             try {
-                const data = await apiCall('/api/admin/users');
-                currentUsers = data;
-                
+                const data = currentUsers;
+
                 const html = `
                     <h3 class="section-title">👥 注册用户</h3>
                     ${data.users.length > 0 ? `
@@ -316,16 +298,16 @@
                                 <th>最后发帖</th>
                                 <th>发帖数</th>
                                 <th>IP地址</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                             ${data.users.map(user => `
-                                <tr>
-                                    <td><strong>${user.ownerName}</strong></td>
-                                    <td>${new Date(user.firstPostDate).toLocaleDateString('zh-CN', {year: 'numeric', month: '2-digit', day: '2-digit'})}</td>
-                                    <td>${new Date(user.lastPostDate).toLocaleDateString('zh-CN', {year: 'numeric', month: '2-digit', day: '2-digit'})}</td>
-                                    <td><strong>${user.totalPosts}</strong> 条</td>
+                                        <tr>
+                                            <td><strong>${user.ownerName}</strong></td>
+                                            <td>${new Date(user.firstPostDate).toLocaleDateString('zh-CN', {year: 'numeric', month: '2-digit', day: '2-digit'})}</td>
+                                            <td>${new Date(user.lastPostDate).toLocaleDateString('zh-CN', {year: 'numeric', month: '2-digit', day: '2-digit'})}</td>
+                                            <td><strong>${user.totalPosts}</strong> 条</td>
                                     <td><code>${user.ip}</code></td>
                                     <td class="actions">
                                         <button class="btn btn-danger" onclick="openBanModal('${user.ownerName}', '${user.ip}')">🚫 封禁</button>
@@ -374,11 +356,15 @@
         }
 
         // 删除纪念册
-        async function deleteMemorial(memorialId) {
+        function deleteMemorial(memorialId) {
             if (!confirm('确定要删除这个纪念册吗？')) return;
-            
+
             try {
-                await apiCall(`/api/admin/memorial/${memorialId}`, { method: 'DELETE' });
+                currentMemorials = currentMemorials.map(memorial =>
+                    memorial.id === memorialId
+                        ? { ...memorial, deleted: true, deletedAt: new Date().toISOString() }
+                        : memorial
+                );
                 alert('删除成功');
                 loadMemorials();
                 loadOverview();
@@ -388,11 +374,15 @@
         }
 
         // 恢复纪念册
-        async function restoreMemorial(memorialId) {
+        function restoreMemorial(memorialId) {
             if (!confirm('确定要恢复这个纪念册吗？')) return;
-            
+
             try {
-                await apiCall(`/api/admin/memorial/${memorialId}/restore`, { method: 'PUT' });
+                currentMemorials = currentMemorials.map(memorial =>
+                    memorial.id === memorialId
+                        ? { ...memorial, deleted: false }
+                        : memorial
+                );
                 alert('恢复成功');
                 loadMemorials();
                 loadOverview();
@@ -430,17 +420,31 @@ IP: ${memorial.clientIp}
         }
 
         // 确认封禁用户
-        async function confirmBan() {
+        function confirmBan() {
             const ownerName = document.getElementById('banOwnerName').value;
             const ip = document.getElementById('banIp').value;
             const reason = document.getElementById('banReason').value;
-            
+
             try {
-                await apiCall('/api/admin/ban-user', {
-                    method: 'POST',
-                    body: JSON.stringify({ ownerName, ip, reason })
-                });
-                
+                const user = currentUsers.users.find(u => u.ownerName === ownerName);
+                if (user) {
+                    currentUsers.users = currentUsers.users.filter(u => u.ownerName !== ownerName);
+                }
+                const banRecord = {
+                    id: `ban-${Date.now()}`,
+                    ownerName,
+                    ip,
+                    reason,
+                    bannedAt: new Date().toISOString(),
+                    originalUser: user || {
+                        ownerName,
+                        firstPostDate: new Date().toISOString(),
+                        lastPostDate: new Date().toISOString(),
+                        totalPosts: 0,
+                        ip
+                    }
+                };
+                currentUsers.bannedUsers = [banRecord, ...currentUsers.bannedUsers];
                 alert('用户封禁成功');
                 closeBanModal();
                 loadUsers();
@@ -451,11 +455,16 @@ IP: ${memorial.clientIp}
         }
 
         // 解封用户
-        async function unbanUser(banId) {
+        function unbanUser(banId) {
             if (!confirm('确定要解封这个用户吗？')) return;
-            
+
             try {
-                await apiCall(`/api/admin/ban-user/${banId}`, { method: 'DELETE' });
+                const bannedUser = currentUsers.bannedUsers.find(user => user.id === banId);
+                currentUsers.bannedUsers = currentUsers.bannedUsers.filter(user => user.id !== banId);
+                if (bannedUser && bannedUser.originalUser) {
+                    const restoredUser = { ...bannedUser.originalUser, lastPostDate: new Date().toISOString() };
+                    currentUsers.users = [restoredUser, ...currentUsers.users];
+                }
                 alert('解封成功');
                 loadUsers();
                 loadOverview();
@@ -465,11 +474,11 @@ IP: ${memorial.clientIp}
         }
 
         // 删除用户
-        async function deleteUser(ownerName) {
+        function deleteUser(ownerName) {
             if (!confirm(`确定要删除用户"${ownerName}"吗？此操作不可恢复！`)) return;
-            
+
             try {
-                await apiCall(`/api/admin/user/${encodeURIComponent(ownerName)}`, { method: 'DELETE' });
+                currentUsers.users = currentUsers.users.filter(user => user.ownerName !== ownerName);
                 alert('用户删除成功');
                 loadUsers();
                 loadOverview();
@@ -479,11 +488,11 @@ IP: ${memorial.clientIp}
         }
 
         // 删除封禁记录
-        async function deleteBannedUser(banId) {
+        function deleteBannedUser(banId) {
             if (!confirm('确定要删除这条封禁记录吗？此操作不可恢复！')) return;
-            
+
             try {
-                await apiCall(`/api/admin/ban-record/${banId}`, { method: 'DELETE' });
+                currentUsers.bannedUsers = currentUsers.bannedUsers.filter(user => user.id !== banId);
                 alert('封禁记录删除成功');
                 loadUsers();
                 loadOverview();
@@ -493,17 +502,32 @@ IP: ${memorial.clientIp}
         }
 
         // 生成Demo数据
-        async function generateDemoData() {
+        function generateDemoData() {
             const count = document.getElementById('demoCount').value;
             if (!confirm(`确定要生成 ${count} 条Demo数据吗？这将使用随机CDN宠物图片。`)) return;
-            
+
             try {
-                const result = await apiCall('/api/admin/generate-demo-data', {
-                    method: 'POST',
-                    body: JSON.stringify({ count: parseInt(count) })
+                const demoCount = parseInt(count, 10) || 0;
+                const newMemorials = Array.from({ length: demoCount }).map((_, index) => {
+                    const timestamp = Date.now() + index;
+                    const image = window.STATIC_DEMO_IMAGES[Math.floor(Math.random() * window.STATIC_DEMO_IMAGES.length)] || '/demo-images/puppy.jpg';
+                    return {
+                        id: `demo-${timestamp}`,
+                        petName: `Demo 宠物 ${index + 1}`,
+                        ownerName: `Demo 用户 ${index + 1}`,
+                        story: '这是一条演示数据，展示管理员工具生成的纪念册内容。',
+                        birthDate: '2015-01-01',
+                        deathDate: '2024-12-31',
+                        photos: [image],
+                        candles: [],
+                        createdAt: new Date().toISOString(),
+                        clientIp: '203.0.113.1',
+                        deleted: false
+                    };
                 });
-                
-                alert(result.message);
+
+                currentMemorials = [...newMemorials, ...currentMemorials];
+                alert(`已生成 ${demoCount} 条Demo数据`);
                 loadOverview();
                 if (document.getElementById('memorials').classList.contains('active')) {
                     loadMemorials();
