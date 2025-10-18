@@ -7,7 +7,7 @@ window.STATIC_MEMORIALS = [
       'Home feels so much emptier without your presence. You were the most loyal companion, always by my side through every adventure. Your gentle soul and playful spirit brought so much joy to our family. I miss your morning greetings and the way you\'d curl up next to me on cold nights. Until we meet again, sweet boy.',
     birthDate: '2012-08-06',
     deathDate: '2025-10-06',
-    photos: ['/demo-images/golden-retriever.jpg'],
+    photos: ['demo-images/golden-retriever.jpg'],
     candles: [
       {
         id: 'candle-001',
@@ -29,7 +29,7 @@ window.STATIC_MEMORIALS = [
       'Maggie was my first child, more than a pet. She was with me through every single life event. My most loyal companion. So loved. I have no words the feeling of emptiness I feel now. You were the kindest little girl in the world. Even when others brought you pain, brought you stress... you never lashed out, you never hissed, bit, or scratched anyone. Even when you were confused and, in such pain, because love was at the core of who you are. You didn\'t deserve such pain, and it killed me to see you go through it. It killed me even more to add onto it, by putting you in your carrier, putting you into the car, driving you to the vet, getting your blood drawn with such painful needles, leaving you there, leaving you there... leaving you beautiful. Leaving you quiet.',
     birthDate: '2004-04-05',
     deathDate: '2025-10-06',
-    photos: ['/demo-images/orange-cat.jpg'],
+    photos: ['demo-images/orange-cat.jpg'],
     candles: [],
     createdAt: '2025-10-08T08:20:00.000Z',
     clientIp: '198.51.100.4',
@@ -43,7 +43,7 @@ window.STATIC_MEMORIALS = [
       'My best friend, my north star, my Honey Bear/Baby Man/Baby Love/Sochi Love (and everything else I called you). I love you more than anything else and always will. You are my world. You are my everything. I love you sweetheart, my sweet boy, and Princess and I miss you like crazy. We cannot wait to see you again.',
     birthDate: '2013-12-28',
     deathDate: '2025-10-06',
-    photos: ['/demo-images/small-dog.jpg'],
+    photos: ['demo-images/small-dog.jpg'],
     candles: [
       {
         id: 'candle-002',
@@ -71,7 +71,7 @@ window.STATIC_MEMORIALS = [
       "Elvis was small but had the biggest personality. He loved wading in creeks or swimming in my mom's pool with the kids. When he was young and spry he would zoom around the living room or out in the sunshine in the backyard, heck even if there was snow. He was gentle- he was the most gentle dog around kids and smaller animals even though he thoroughly enjoyed chasing our chickens around the yard, knowing full well he would never catch one. He was a ball dog for sure, if it bounced he was all about it. Elvis was a crafty scavenger too, once pulling a bag of dog food twice his weight out from the closet and opening it for a buffet while we were at work. Unlike his older brother Odin, Elvis never minded getting his paws wet.",
     birthDate: '2011-05-25',
     deathDate: '2025-10-06',
-    photos: ['/demo-images/puppy.jpg'],
+    photos: ['demo-images/puppy.jpg'],
     candles: [
       {
         id: 'candle-004',
@@ -91,7 +91,7 @@ window.STATIC_MEMORIALS = [
     story: 'Forever wouldn\'t have been enough time with you. You are dearly missed and will be in my heart forever.',
     birthDate: '2007-02-11',
     deathDate: '2025-10-10',
-    photos: ['/demo-images/white-cat.jpg'],
+    photos: ['demo-images/white-cat.jpg'],
     candles: [],
     createdAt: '2025-10-07T15:30:00.000Z',
     clientIp: '203.0.113.88',
@@ -104,7 +104,7 @@ window.STATIC_MEMORIALS = [
     story: 'Rest easy, my kitty until we meet again at the end of all things.',
     birthDate: '2004-04-07',
     deathDate: '2025-09-24',
-    photos: ['/demo-images/black-cat.jpg'],
+    photos: ['demo-images/black-cat.jpg'],
     candles: [
       {
         id: 'candle-005',
@@ -124,7 +124,7 @@ window.STATIC_MEMORIALS = [
     story: 'We love you always, Tooty.',
     birthDate: '2016-05-16',
     deathDate: '2025-10-05',
-    photos: ['/demo-images/puppy.jpg'],
+    photos: ['demo-images/puppy.jpg'],
     candles: [],
     createdAt: '2025-10-07T10:05:00.000Z',
     clientIp: '198.51.100.44',
@@ -189,13 +189,13 @@ window.STATIC_USERS = {
 };
 
 window.STATIC_DEMO_IMAGES = [
-  '/demo-images/golden-retriever.jpg',
-  '/demo-images/orange-cat.jpg',
-  '/demo-images/small-dog.jpg',
-  '/demo-images/puppy.jpg',
-  '/demo-images/white-cat.jpg',
-  '/demo-images/black-cat.jpg',
-  '/demo-images/beagle.jpg',
-  '/demo-images/labrador.jpg',
-  '/demo-images/gray-cat.jpg'
+  'demo-images/golden-retriever.jpg',
+  'demo-images/orange-cat.jpg',
+  'demo-images/small-dog.jpg',
+  'demo-images/puppy.jpg',
+  'demo-images/white-cat.jpg',
+  'demo-images/black-cat.jpg',
+  'demo-images/beagle.jpg',
+  'demo-images/labrador.jpg',
+  'demo-images/gray-cat.jpg'
 ];
