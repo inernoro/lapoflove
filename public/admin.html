@@ -536,7 +536,7 @@ IP: ${memorial.clientIp}
                 const demoCount = parseInt(count, 10) || 0;
                 const newMemorials = Array.from({ length: demoCount }).map((_, index) => {
                     const timestamp = Date.now() + index;
-                    const image = window.STATIC_DEMO_IMAGES[Math.floor(Math.random() * window.STATIC_DEMO_IMAGES.length)] || '/demo-images/puppy.jpg';
+                    const image = window.STATIC_DEMO_IMAGES[Math.floor(Math.random() * window.STATIC_DEMO_IMAGES.length)] || 'demo-images/puppy.jpg';
                     return {
                         id: `demo-${timestamp}`,
                         petName: `Demo 宠物 ${index + 1}`,
